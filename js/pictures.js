@@ -12,64 +12,67 @@ var PHOTOS_QUANTITY = 25;
 
 // получить случайное число от min до max
 var getRandomNum = function (min, max) {
-  return Math.floor(Math.random() * (max - min) + min);
+  return Math.floor(Math.random() * (max - min + 1) + min);
 };
 
 // получить случайный комментарий
-var getRandomComment = function (arr) {
-  var i = getRandomNum(0, arr.length);
-  return arr[i];
+var getComments = function (commentsQuantity) {
+  var comments = [];
+  for (var i = 0; i < commentsQuantity; i++) {
+    var j = getRandomNum(0, COMMENTS.length);
+    comments.push(COMMENTS[j]);
+  }
+  return comments;
 };
 
 // 1. создать массив с объектами
-var createPhotosData = function (quantity) {
-  var data = [];
-  for (var i = 1; i <= quantity; i++) {
+var createPhotos = function (quantity) {
+  var photos = [];
+  for (var i = 0; i < quantity; i++) {
     var photo = {
-      url: 'photos/' + i + '.jpg',
+      url: 'photos/' + (i + 1) + '.jpg',
       likes: getRandomNum(15, 200),
-      comments: getRandomComment(COMMENTS)
+      comments: getComments(getRandomNum(1, 2))
     };
-    data.push(photo);
+    photos.push(photo);
   }
-  return data;
+  return photos;
 };
 
 // 2. создаем DOM-элементы на основе pictures-template
 var photoTemplate = document.querySelector('#picture-template').content;
 
-
-var createPhotoObject = function (array) {
+var createPhotoElement = function (photo) {
   var photoElement = photoTemplate.cloneNode(true);
-  photoElement.querySelector('.picture img').src = array.url;
-  photoElement.querySelector('.picture-likes').textContent = array.likes;
-  photoElement.querySelector('.picture-comments').textContent = array.Comments;
+  photoElement.querySelector('.picture img').src = photo.url;
+  photoElement.querySelector('.picture-likes').textContent = photo.likes;
+  photoElement.querySelector('.picture-comments').textContent = photo.comments.length;
   return photoElement;
 };
 
 // 3.отрисуем DOM-элементы в блок .pictures c помощью DocumentFragment
 var photoBlock = document.querySelector('.pictures'); // блок для вставки
-var photoFragment = document.createDocumentFragment(); // фрагмент для вставки
 
-var renderPhotos = function (array) {
-  for (var i = 0; i < PHOTOS_QUANTITY; i++) {
-    photoFragment.appendChild(createPhotoObject(array[i]));
-    photoBlock.appendChild(photoFragment);
+var renderPhotos = function (photos) {
+  var photoFragment = document.createDocumentFragment(); // фрагмент для вставки
+  for (var i = 0; i < photos.length; i++) {
+    photoFragment.appendChild(createPhotoElement(photos[i]));
   }
+  return photoFragment;
 };
 
-renderPhotos(createPhotosData(PHOTOS_QUANTITY));
+var photos = createPhotos(PHOTOS_QUANTITY);
+photoBlock.appendChild(renderPhotos(photos));
 
-
-// 4.покажем элемент gallery-overlay и заполним1 его данными из первого элемента массива
-
+// 4.покажем элемент gallery-overlay
 document.querySelector('.gallery-overlay').classList.remove('hidden');
 
-var renderMainPhoto = function (array) {
+var renderMainPhoto = function (photo) {
   var gallery = document.querySelector('.gallery-overlay');
-  gallery.querySelector('.gallery-overlay-image').src = array[0].url;
-  gallery.querySelector('.likes-count').textContent = array[0].likes;
-  gallery.querySelector('.comments-count').textContent = array[0].comments.length;
+  gallery.querySelector('.gallery-overlay-image').src = photo.url;
+  gallery.querySelector('.likes-count').textContent = photo.likes;
+  gallery.querySelector('.comments-count').textContent = photo.comments.length;
 };
 
-renderMainPhoto(createPhotosData(PHOTOS_QUANTITY));
+// и заполним его данными из первого элемента массива
+renderMainPhoto(photos[0]);
