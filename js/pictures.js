@@ -12,15 +12,15 @@ var PHOTOS_QUANTITY = 25;
 
 // получить случайное число от min до max
 var getRandomNum = function (min, max) {
-  return Math.floor(Math.random() * (max - min + 1) + min);
+  return Math.round(Math.random() * (max - min) + min);
 };
 
 // получить случайный комментарий
 var getComments = function (commentsQuantity) {
   var comments = [];
   for (var i = 0; i < commentsQuantity; i++) {
-    var j = getRandomNum(0, COMMENTS.length);
-    comments.push(COMMENTS[j]);
+    var comment = getRandomNum(0, COMMENTS.length);
+    comments.push(COMMENTS[comment]);
   }
   return comments;
 };
