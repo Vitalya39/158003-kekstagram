@@ -9,6 +9,7 @@ var COMMENTS = ['Всё отлично!',
 ];
 
 var PHOTOS_QUANTITY = 25;
+var ESC_KEYCODE = 27;
 
 // получить случайное число от min до max
 var getRandomNum = function (min, max) {
@@ -65,7 +66,7 @@ var photos = createPhotos(PHOTOS_QUANTITY);
 photoBlock.appendChild(renderPhotos(photos));
 
 // 4.покажем элемент gallery-overlay
-document.querySelector('.gallery-overlay').classList.remove('hidden');
+// document.querySelector('.gallery-overlay').classList.remove('hidden');
 
 var renderMainPhoto = function (photo) {
   var gallery = document.querySelector('.gallery-overlay');
@@ -76,3 +77,22 @@ var renderMainPhoto = function (photo) {
 
 // и заполним его данными из первого элемента массива
 renderMainPhoto(photos[0]);
+
+//  MODULE4-TASK1
+
+// Открытие и закрытие окна редактирования изображений
+
+var fileInput = document.querySelector('#upload-file'); //  поле выбора файла
+var editImageOverlay = document.querySelector('.upload-overlay'); // форма редактирования
+var closeImageOverlay = editImageOverlay.querySelector('#upload-cancel');
+
+//  при наступлении события change покажем форму редактирования
+fileInput.addEventListener('change', function () {
+  editImageOverlay.classList.remove('hidden');
+});
+
+//  закроем форму редактирования нажатием на #upload-cancel
+closeImageOverlay.addEventListener('click', function () {
+  editImageOverlay.reset();
+  editImageOverlay.classList.add('hidden');
+});
