@@ -80,7 +80,7 @@ renderMainPhoto(photos[0]);
 
 //  MODULE4-TASK1
 
-// Открытие и закрытие окна редактирования изображений ==============
+// ============== ОТКРЫТИЕ И ЗАКРЫТИЕ ОКНА РЕДАКТИРОВАНИЯ ==============
 
 var fileInput = document.querySelector('#upload-file'); //  поле выбора файла
 var editImageOverlay = document.querySelector('.upload-overlay'); // форма редактирования
@@ -97,13 +97,13 @@ closeImageOverlay.addEventListener('click', function () {
   editImageOverlay.reset();
 });
 
-// эффекты ==============
+// ============== МАСШТАБИРОВАНИЕ ==============
 var imagePreview = document.querySelector('.effect-image-preview'); // изображение
 var size = document.querySelector('.upload-resize-controls-value'); // поле для изменения, должно измениться при нажатии на кнопки
 var sizeInc = document.querySelector('.upload-resize-controls-button-inc'); // кнопка плюс
 var sizeDec = document.querySelector('.upload-resize-controls-button-dec'); // кнопка минус
 
-// напишем функцию для изменения размера
+// напишем функцию для изменения размера изображения
 var imagePreviewScale = function () {
   var commonValue = parseInt(size.value, 10); // находим текущее значение
   var scale = commonValue / 100; // делим его на 100
@@ -139,3 +139,104 @@ var decreseSize = function () {
   }
   imagePreviewScale();
 };
+
+// =============================== ЭФФЕКТЫ =============================
+var slider = document.querySelector('.upload-effect-level'); // найдем слайдер
+var effectValue = document.querySelector('upload-effect-level-value'); // сюда будем записывать значение элемента
+// напишем функции для показа и исчезновения слайдера
+
+var showSlider = function () {
+  slider.classList.remove('hidden');
+};
+var hideSlider = function () {
+  slider.classList.add('hidden');
+};
+
+// убрать эффекты
+var noneRadio = document.querySelector('#upload-effect-none');
+noneRadio.addEventListener('click', function () {
+  applyNone();
+});
+
+var applyNone = function () {
+  imagePreview.style.filter = '';
+  hideSlider();
+};
+
+// применение эффекта хром
+var chromeRadio = document.querySelector('#upload-effect-chrome');
+chromeRadio.addEventListener('click', function () {
+  applyChrome();
+});
+
+var applyChrome = function () {
+  imagePreview.style.filter = 'grayscale(0.5)';
+  showSlider();
+};
+
+// применение эффекта sepia
+var sepiaRadio = document.querySelector('#upload-effect-sepia');
+sepiaRadio.addEventListener('click', function () {
+  applySepia();
+});
+
+var applySepia = function () {
+  imagePreview.style.filter = 'sepia(0.5)';
+  showSlider();
+};
+
+// применение эффекта marvin
+var marvinRadio = document.querySelector('#upload-effect-marvin');
+marvinRadio.addEventListener('click', function () {
+  applyMarvin();
+});
+
+var applyMarvin = function () {
+  imagePreview.style.filter = 'invert(75%)';
+  showSlider();
+};
+
+// применение эффекта fobos
+var phobosRadio = document.querySelector('#upload-effect-phobos');
+phobosRadio.addEventListener('click', function () {
+  applyPhobos();
+});
+
+var applyPhobos = function () {
+  imagePreview.style.filter = 'blur(3px)';
+  showSlider();
+};
+
+// применение эффекта heat
+var heatRadio = document.querySelector('#upload-effect-heat');
+heatRadio.addEventListener('click', function () {
+  applyHeat();
+});
+
+var applyHeat = function () {
+  imagePreview.style.filter = 'brightness(3)';
+  showSlider();
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// =========================== РАБОТА С ПОЛЗУНКОМ =============================
+var sliderPin = document.querySelector('upload-effect-level-pin'); // найдем ползунок
+
+sliderPin.addEventListener('mouseup', function () {
+
+});
