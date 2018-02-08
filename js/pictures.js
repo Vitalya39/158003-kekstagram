@@ -80,7 +80,7 @@ renderMainPhoto(photos[0]);
 
 //  MODULE4-TASK1
 
-// Открытие и закрытие окна редактирования изображений
+// Открытие и закрытие окна редактирования изображений ==============
 
 var fileInput = document.querySelector('#upload-file'); //  поле выбора файла
 var editImageOverlay = document.querySelector('.upload-overlay'); // форма редактирования
@@ -93,6 +93,43 @@ fileInput.addEventListener('change', function () {
 
 //  закроем форму редактирования нажатием на #upload-cancel
 closeImageOverlay.addEventListener('click', function () {
-  editImageOverlay.reset();
   editImageOverlay.classList.add('hidden');
+  editImageOverlay.reset();
 });
+
+// эффекты ==============
+var imagePreview = document.querySelector('.effect-image-preview'); // изображение
+var size = document.querySelector('.upload-resize-controls-value'); // поле для изменения, должно измениться при нажатии на кнопки
+var sizeInc = document.querySelector('.upload-resize-controls-button-inc'); // кнопка плюс
+var sizeDec = document.querySelector('.upload-resize-controls-button-dec'); // кнопка минус
+
+// напишем функцию для изменения размера
+var imagePreviewScale = function () {
+  var commonValue = parseInt(size.value, 10); // находим текущее значение
+  var scale = commonValue / 100; // делим его на 100
+  imagePreview.style.transform = 'scale(' + scale + ')'; // добавляем это значение в img
+};
+
+// добавим обработчик события на sizeIncrese
+sizeInc.addEventListener('click', function () {
+  increaseSize();
+});
+
+// напишем функцию для увелечения изображения
+var increaseSize = function () {
+  var commonValue = parseInt(size.value, 10);
+  size.value = commonValue + 25 + '%';
+  imagePreviewScale();
+};
+
+// добавим обработчик события на sizeDecrese
+sizeDec.addEventListener('click', function () {
+  decreseSize();
+});
+
+// напишем функцию для уменьшения изображения
+var decreseSize = function () {
+  var commonValue = parseInt(size.value, 10);
+  size.value = commonValue - 25 + '%';
+  imagePreviewScale();
+};
