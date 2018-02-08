@@ -119,6 +119,9 @@ sizeInc.addEventListener('click', function () {
 var increaseSize = function () {
   var commonValue = parseInt(size.value, 10);
   size.value = commonValue + 25 + '%';
+  if (parseInt(size.value, 10) > 100) {
+    size.value = 100 + '%';
+  }
   imagePreviewScale();
 };
 
@@ -131,5 +134,8 @@ sizeDec.addEventListener('click', function () {
 var decreseSize = function () {
   var commonValue = parseInt(size.value, 10);
   size.value = commonValue - 25 + '%';
+  if (parseInt(size.value, 10) < 0) {
+    size.value = 0 + '%';
+  }
   imagePreviewScale();
 };
