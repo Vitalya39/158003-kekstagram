@@ -41,15 +41,28 @@ var createPhotos = function (quantity) {
 };
 
 // 2. создаем DOM-элементы на основе pictures-template
+// 2+ . добавляем эвентлистенер для открытия изображенияво все окно
+var overlay = document.querySelector('.gallery-overlay');
+var closeOverlayButton = overlay.querySelector('.gallery-overlay-close');
 var photoTemplate = document.querySelector('#picture-template').content;
 
 var createPhotoElement = function (photo) {
-  var photoElement = photoTemplate.cloneNode(true);
+  var photoElement = photoTemplate.querySelector('.picture').cloneNode(true);
   photoElement.querySelector('.picture img').src = photo.url;
   photoElement.querySelector('.picture-likes').textContent = photo.likes;
   photoElement.querySelector('.picture-comments').textContent = photo.comments.length;
+  photoElement.addEventListener('click', function (evt) {
+    evt.preventDefault();
+    renderMainPhoto(photo);
+    overlay.classList.remove('hidden');
+    closeOverlayButton.addEventListener('click', function () {
+      overlay.classList.add('hidden');
+      overlay.reset();
+    });
+  });
   return photoElement;
 };
+
 
 // 3.отрисуем DOM-элементы в блок .pictures c помощью DocumentFragment
 var photoBlock = document.querySelector('.pictures'); // блок для вставки
@@ -65,20 +78,17 @@ var renderPhotos = function (photos) {
 var photos = createPhotos(PHOTOS_QUANTITY);
 photoBlock.appendChild(renderPhotos(photos));
 
-// 4.покажем элемент gallery-overlay
-// document.querySelector('.gallery-overlay').classList.remove('hidden');
-
+// 4.функция для показа полноэкранного изображения
 var renderMainPhoto = function (photo) {
-  var gallery = document.querySelector('.gallery-overlay');
-  gallery.querySelector('.gallery-overlay-image').src = photo.url;
-  gallery.querySelector('.likes-count').textContent = photo.likes;
-  gallery.querySelector('.comments-count').textContent = photo.comments.length;
+  overlay.querySelector('.gallery-overlay-image').src = photo.url;
+  overlay.querySelector('.likes-count').textContent = photo.likes;
+  overlay.querySelector('.comments-count').textContent = photo.comments.length;
 };
 
 // и заполним его данными из первого элемента массива
-renderMainPhoto(photos[0]);
+// renderMainPhoto(photos[0]);
 
-//  MODULE4-TASK1
+//  ========================!!MODULE4-TASK1!!========================
 
 // ============== ОТКРЫТИЕ И ЗАКРЫТИЕ ОКНА РЕДАКТИРОВАНИЯ ==============
 
@@ -217,26 +227,3 @@ var applyHeat = function () {
   imagePreview.style.filter = 'brightness(3)';
   showSlider();
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// =========================== РАБОТА С ПОЛЗУНКОМ =============================
-var sliderPin = document.querySelector('upload-effect-level-pin'); // найдем ползунок
-
-sliderPin.addEventListener('mouseup', function () {
-
-});
