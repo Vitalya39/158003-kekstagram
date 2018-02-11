@@ -115,8 +115,8 @@ var sizeDec = document.querySelector('.upload-resize-controls-button-dec'); // �
 
 // напишем функцию для изменения размера изображения
 var imagePreviewScale = function () {
-  var commonValue = parseInt(size.value, 10); // находим текущее значение
-  var scale = commonValue / 100; // делим его на 100
+  var currentValue = parseInt(size.value, 10); // находим текущее значение
+  var scale = currentValue / 100; // делим его на 100
   imagePreview.style.transform = 'scale(' + scale + ')'; // добавляем это значение в img
 };
 
@@ -127,8 +127,8 @@ sizeInc.addEventListener('click', function () {
 
 // напишем функцию для увелечения изображения
 var increaseSize = function () {
-  var commonValue = parseInt(size.value, 10);
-  size.value = commonValue + 25 + '%';
+  var currentValue = parseInt(size.value, 10);
+  size.value = currentValue + 25 + '%';
   if (parseInt(size.value, 10) > 100) {
     size.value = 100 + '%';
   }
@@ -153,6 +153,8 @@ var decreseSize = function () {
 // =============================== ЭФФЕКТЫ =============================
 var slider = document.querySelector('.upload-effect-level'); // найдем слайдер
 var effectValue = document.querySelector('upload-effect-level-value'); // сюда будем записывать значение элемента
+
+
 // напишем функции для показа и исчезновения слайдера
 
 var showSlider = function () {
