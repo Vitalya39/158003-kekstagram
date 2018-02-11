@@ -10,6 +10,7 @@ var COMMENTS = ['Всё отлично!',
 
 var PHOTOS_QUANTITY = 25;
 var ESC_KEYCODE = 27;
+var ENTER_KEYCODE = 13;
 
 // получить случайное число от min до max
 var getRandomNum = function (min, max) {
@@ -96,20 +97,35 @@ var fileInput = document.querySelector('#upload-file'); //  поле выбор�
 var editImageOverlay = document.querySelector('.upload-overlay'); // форма редактирования
 var closeImageOverlay = editImageOverlay.querySelector('#upload-cancel');
 
-//  при наступлении события change покажем форму редактирования
+// напишем функцию для открытия окна редактирования
 var openForm = function () {
   editImageOverlay.classList.remove('hidden');
 };
+
+var closeForm = function () {
+  editImageOverlay.classList.add('hidden');
+  editImageOverlay.reset();
+};
+
+// при наступлении события change откроем окно
 
 fileInput.addEventListener('change', function () {
   openForm();
 });
 
+// когда кнопка в фокусе, открыть окно редактирования по нажатию на enter
+
+fileInput.addEventListener('keydown', function (evt) {
+  if (evt.keyCode === ENTER_KEYCODE) {
+    openForm();
+  }
+});
+
 //  закроем форму редактирования нажатием на #upload-cancel
 closeImageOverlay.addEventListener('click', function () {
-  editImageOverlay.classList.add('hidden');
-  editImageOverlay.reset();
+  closeForm();
 });
+
 
 // ============== МАСШТАБИРОВАНИЕ ==============
 var imagePreview = document.querySelector('.effect-image-preview'); // изображение
