@@ -10,7 +10,7 @@ var COMMENTS = ['Всё отлично!',
 
 var PHOTOS_QUANTITY = 25;
 var ESC_KEYCODE = 27;
-var ENTER_KEYCODE = 13;
+// var ENTER_KEYCODE = 13;
 
 // получить случайное число от min до max
 var getRandomNum = function (min, max) {
@@ -180,7 +180,8 @@ var decreseSize = function () {
 // =============================== ЭФФЕКТЫ =============================
 
 var slider = document.querySelector('.upload-effect-level'); // найдем слайдер
-var effectValue = document.querySelector('upload-effect-level-value'); // сюда будем записывать значение элемента
+// var effectValue = document.querySelector('upload-effect-level-value');
+// сюда будем записывать значение элемента
 
 
 // напишем функции для показа и исчезновения слайдера
