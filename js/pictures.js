@@ -97,8 +97,12 @@ var editImageOverlay = document.querySelector('.upload-overlay'); // форма 
 var closeImageOverlay = editImageOverlay.querySelector('#upload-cancel');
 
 //  при наступлении события change покажем форму редактирования
-fileInput.addEventListener('change', function () {
+var openForm = function () {
   editImageOverlay.classList.remove('hidden');
+};
+
+fileInput.addEventListener('change', function () {
+  openForm();
 });
 
 //  закроем форму редактирования нажатием на #upload-cancel
