@@ -56,13 +56,26 @@ var createPhotoElement = function (photo) {
     evt.preventDefault();
     renderMainPhoto(photo);
     overlay.classList.remove('hidden');
-    closeOverlayButton.addEventListener('click', function () {
-      overlay.classList.add('hidden');
-      overlay.reset();
-    });
   });
   return photoElement;
 };
+
+// функция закрытия полноэкранного изображения
+var closeOverlay = function () {
+  overlay.classList.add('hidden');
+  overlay.reset();
+};
+
+// добавим обработчики для закрытия полноэкранного изображения на крестик и на esc
+closeOverlayButton.addEventListener('click', function () {
+  closeOverlay();
+});
+
+closeOverlayButton.addEventListener('keydown', function (evt) {
+  if (evt.keyCode === ESC_KEYCODE) {
+    closeOverlay();
+  }
+});
 
 
 // 3.отрисуем DOM-элементы в блок .pictures c помощью DocumentFragment
@@ -102,6 +115,7 @@ var openForm = function () {
   editImageOverlay.classList.remove('hidden');
 };
 
+// напишем функцию для закрытия окна редактирования и сброса данных
 var closeForm = function () {
   editImageOverlay.classList.add('hidden');
   editImageOverlay.reset();
@@ -113,21 +127,14 @@ fileInput.addEventListener('change', function () {
   openForm();
 });
 
-// когда кнопка в фокусе, открыть окно редактирования по нажатию на enter
-
-fileInput.addEventListener('keydown', function (evt) {
-  if (evt.keyCode === ENTER_KEYCODE) {
-    openForm();
-  }
-});
-
 //  закроем форму редактирования нажатием на #upload-cancel
 closeImageOverlay.addEventListener('click', function () {
   closeForm();
 });
 
 
-// ============== МАСШТАБИРОВАНИЕ ==============
+// ============================= МАСШТАБИРОВАНИЕ =============================
+
 var imagePreview = document.querySelector('.effect-image-preview'); // изображение
 var size = document.querySelector('.upload-resize-controls-value'); // поле для изменения, должно измениться при нажатии на кнопки
 var sizeInc = document.querySelector('.upload-resize-controls-button-inc'); // кнопка плюс
@@ -171,12 +178,12 @@ var decreseSize = function () {
 };
 
 // =============================== ЭФФЕКТЫ =============================
+
 var slider = document.querySelector('.upload-effect-level'); // найдем слайдер
 var effectValue = document.querySelector('upload-effect-level-value'); // сюда будем записывать значение элемента
 
 
 // напишем функции для показа и исчезновения слайдера
-
 var showSlider = function () {
   slider.classList.remove('hidden');
 };
