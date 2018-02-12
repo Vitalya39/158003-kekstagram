@@ -262,32 +262,45 @@ var applyHeat = function () {
 // ==============================MODULE 4 - TASK 2==============================
 // ==================================ВАЛИДАЦИЯ==================================
 
-var validateHashtags = function () { // функция валидации
-  var hashtagsInput = editImageOverlay.querySelector('.upload-form-hashtags'); // окно хештегов
-  var hashtags = hashtagsInput.value;
-  hashtags = hashtags.toLowerCase();
-  hashtags = hashtags.split(' ');
+var hashtagsInput = editImageOverlay.querySelector('.upload-form-hashtags'); // окно хештегов
+var isValidHashtags = function () { // функция валидации
+  var hashtags = hashtagsInput.value.toLowerCase().split(' ');
+
+  if (hashtags.length > 5) {
+    hashtagsInput.setCustomValidity('Максимальное количество хештегов ЭТО ПЯТЬ!');
+    return false;
+  }
+
   for (var i = 0; i < hashtags.length; i++) {
-    if (hashtags.length > 5) {
-      hashtagsInput.setCustomValidity('Максимальное количество хештегов ЭТО ПЯТЬ!');
-      return false;
-    } else if (hashtags[i][0] !== '#') {
+    if (hashtags[i].lastIndexOf('#') === 0) {
       hashtagsInput.setCustomValidity('Истину найдешь в решточке #');
       return false;
-    } else if (hashtags[i].length > HASHTAG_MAX_LENGTH) {
+    }
+
+    if (hashtags[i].length > HASHTAG_MAX_LENGTH) {
       hashtagsInput.setCustomValidity('Слишком много букаф, попробуй меньше ' + HASHTAG_MAX_LENGTH + '');
       return false;
-    } else if (hashtags.includes(hashtags[i], i + 1)) {
+    }
+    if (hashtags.includes(hashtags[i], i + 1)) {
       hashtagsInput.setCustomValidity('Не повторяйся');
       return false;
-    } else {
-      hashtagsInput.setCustomValidity('');
     }
   }
+
+  hashtagsInput.setCustomValidity('');
   return true;
 };
 
-var sendFormButton = editImageOverlay.querySelector('.upload-form-submit'); // кнопка для отправки формы
-sendFormButton.addEventListener('click', function () {
-  validateHashtags();
+var form = document.querySelector('upload-form');
+form.addEventListener('submit', function (evt) {
+  if (!isValidHashtags()) {
+    evt.preventDefault();
+  }
 });
+
+
+//
+// var sendFormButton = editImageOverlay.querySelector('.upload-form-submit'); // кнопка для отправки формы
+// sendFormButton.addEventListener('click', function () {
+//   validateHashtags();
+// });
