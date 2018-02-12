@@ -10,6 +10,7 @@ var COMMENTS = ['Всё отлично!',
 
 var PHOTOS_QUANTITY = 25;
 var ESC_KEYCODE = 27;
+var HASHTAG_MAX_LENGTH = 20;
 // var ENTER_KEYCODE = 13;
 
 // получить случайное число от min до max
@@ -71,7 +72,7 @@ closeOverlayButton.addEventListener('click', function () {
   closeOverlay();
 });
 
-closeOverlayButton.addEventListener('keydown', function (evt) {
+document.addEventListener('keydown', function (evt) {
   if (evt.keyCode === ESC_KEYCODE) {
     closeOverlay();
   }
@@ -257,3 +258,36 @@ var applyHeat = function () {
   imagePreview.style.filter = 'brightness(3)';
   showSlider();
 };
+
+// ==============================MODULE 4 - TASK 2==============================
+// ==================================ВАЛИДАЦИЯ==================================
+
+var validateHashtags = function () { // функция валидации
+  var hashtagsInput = editImageOverlay.querySelector('.upload-form-hashtags'); // окно хештегов
+  var hashtags = hashtagsInput.value;
+  hashtags = hashtags.toLowerCase();
+  hashtags = hashtags.split(' ');
+  for (var i = 0; i < hashtags.length; i++) {
+    if (hashtags.length > 5) {
+      hashtagsInput.setCustomValidity('Максимальное количество хештегов ЭТО ПЯТЬ!');
+      return false;
+    } else if (hashtags[i][0] !== '#') {
+      hashtagsInput.setCustomValidity('Истину найдешь в решточке #');
+      return false;
+    } else if (hashtags[i].length > HASHTAG_MAX_LENGTH) {
+      hashtagsInput.setCustomValidity('Слишком много букаф, попробуй меньше ' + HASHTAG_MAX_LENGTH + '');
+      return false;
+    } else if (hashtags.includes(hashtags[i], i + 1)) {
+      hashtagsInput.setCustomValidity('Не повторяйся');
+      return false;
+    } else {
+      hashtagsInput.setCustomValidity('');
+    }
+  }
+  return true;
+};
+
+var sendFormButton = editImageOverlay.querySelector('.upload-form-submit'); // кнопка для отправки формы
+sendFormButton.addEventListener('click', function () {
+  validateHashtags();
+});
