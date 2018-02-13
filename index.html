@@ -23,10 +23,10 @@
   <label for="filter-random" class="filters-item">Случайные</label>
 </form>
 
-<form class="upload-form" id="upload-select-image" method="post" enctype="multipart/form-data" autocomplete="off">
-  <div class="upload-image">
-    <input type="file" id="upload-file" class="upload-input" name="filename" required>
-    <label class="upload-file upload-control" for="upload-file"></label>
+<form class="upload-form" id="upload-select-image" method="post" enctype="multipart/form-data" autocomplete="off" >
+  <div class="upload-image" >
+    <input tabindex="0" type="file" id="upload-file" class="upload-input" name="filename" required >
+    <label  class="upload-file upload-control" for="upload-file"></label>
   </div>
 
   <div class="upload-overlay hidden">
@@ -44,7 +44,7 @@
 
         <div class="upload-form-preview">
           <div></div>
-          <img src="img/upload-default-image.jpg" class="effect-image-preview">
+          <img src="img/upload-default-image.jpg" class="effect-image-preview" >
         </div>
 
         <fieldset class="upload-effect-controls">
@@ -95,7 +95,7 @@
 
         <input class="upload-form-hashtags" name="hashtags" placeholder="#хэш-тег">
 
-        <textarea class="upload-form-description" name="description" placeholder="Ваш комментарий..."></textarea>
+        <textarea class="upload-form-description" name="description" placeholder="Ваш комментарий..." maxlength="140"></textarea>
 
         <button class="upload-form-cancel" type="reset" id="upload-cancel">Закрыть</button>
         <button class="upload-form-submit" type="submit" id="upload-submit">Отправить</button>
@@ -130,7 +130,7 @@
 
 
 <div class="gallery-overlay hidden">
-  <span class="gallery-overlay-close">&times;</span>
+  <span class="gallery-overlay-close" tabindex="0">&times;</span>
   <div class="gallery-overlay-preview">
     <img src="" class="gallery-overlay-image" alt="">
     <div class="gallery-overlay-controls">
