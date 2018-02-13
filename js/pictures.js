@@ -11,7 +11,7 @@ var COMMENTS = ['Всё отлично!',
 var PHOTOS_QUANTITY = 25;
 var ESC_KEYCODE = 27;
 var HASHTAG_MAX_LENGTH = 20;
-// var ENTER_KEYCODE = 13;
+var ENTER_KEYCODE = 13;
 
 // получить случайное число от min до max
 var getRandomNum = function (min, max) {
@@ -56,27 +56,29 @@ var createPhotoElement = function (photo) {
   photoElement.addEventListener('click', function (evt) {
     evt.preventDefault();
     renderMainPhoto(photo);
-    overlay.classList.remove('hidden');
+    openOverlay();
   });
   return photoElement;
+};
+
+// функция открытия полноэкранного изображения
+var openOverlay = function () {
+  overlay.classList.remove('hidden');
+  document.addEventListener('keydown', onPopupEscPress);
 };
 
 // функция закрытия полноэкранного изображения
 var closeOverlay = function () {
   overlay.classList.add('hidden');
-  overlay.reset();
+  document.removeEventListener('keydown', onPopupEscPress);
 };
 
-// добавим обработчики для закрытия полноэкранного изображения на крестик и на esc
-closeOverlayButton.addEventListener('click', function () {
-  closeOverlay();
-});
-
-document.addEventListener('keydown', function (evt) {
+// добавим закрытия окна на esc
+var onPopupEscPress = function (evt) {
   if (evt.keyCode === ESC_KEYCODE) {
     closeOverlay();
   }
-});
+};
 
 
 // 3.отрисуем DOM-элементы в блок .pictures c помощью DocumentFragment
@@ -98,6 +100,18 @@ var renderMainPhoto = function (photo) {
   overlay.querySelector('.gallery-overlay-image').src = photo.url;
   overlay.querySelector('.likes-count').textContent = photo.likes;
   overlay.querySelector('.comments-count').textContent = photo.comments.length;
+
+  // добавим обработчики для закрытия полноэкранного изображения на крестик
+  closeOverlayButton.addEventListener('click', function () {
+    closeOverlay();
+  });
+
+  //  добавим возможность закрытия окна после tab на крестик и enter
+  closeOverlayButton.addEventListener('keydown', function (evt) {
+    if (evt.keyCode === ENTER_KEYCODE) {
+      closeOverlay();
+    }
+  });
 };
 
 // и заполним его данными из первого элемента массива
@@ -148,11 +162,6 @@ var imagePreviewScale = function () {
   imagePreview.style.transform = 'scale(' + scale + ')'; // добавляем это значение в img
 };
 
-// добавим обработчик события на sizeIncrese
-sizeInc.addEventListener('click', function () {
-  increaseSize();
-});
-
 // напишем функцию для увелечения изображения
 var increaseSize = function () {
   var currentValue = parseInt(size.value, 10);
@@ -163,9 +172,9 @@ var increaseSize = function () {
   imagePreviewScale();
 };
 
-// добавим обработчик события на sizeDecrese
-sizeDec.addEventListener('click', function () {
-  decreseSize();
+// добавим обработчик события на sizeIncrese
+sizeInc.addEventListener('click', function () {
+  increaseSize();
 });
 
 // напишем функцию для уменьшения изображения
@@ -178,12 +187,14 @@ var decreseSize = function () {
   imagePreviewScale();
 };
 
+// добавим обработчик события на sizeDecrese
+sizeDec.addEventListener('click', function () {
+  decreseSize();
+});
+
 // =============================== ЭФФЕКТЫ =============================
 
 var slider = document.querySelector('.upload-effect-level'); // найдем слайдер
-// var effectValue = document.querySelector('upload-effect-level-value');
-// сюда будем записывать значение элемента
-
 
 // напишем функции для показа и исчезновения слайдера
 var showSlider = function () {
@@ -196,10 +207,10 @@ var hideSlider = function () {
 // убрать эффекты
 var noneRadio = document.querySelector('#upload-effect-none');
 noneRadio.addEventListener('click', function () {
-  applyNone();
+  dis();
 });
 
-var applyNone = function () {
+var dis = function () {
   imagePreview.style.filter = '';
   hideSlider();
 };
@@ -207,10 +218,10 @@ var applyNone = function () {
 // применение эффекта хром
 var chromeRadio = document.querySelector('#upload-effect-chrome');
 chromeRadio.addEventListener('click', function () {
-  applyChrome();
+  applyEffectChrome();
 });
 
-var applyChrome = function () {
+var applyEffectChrome = function () {
   imagePreview.style.filter = 'grayscale(0.5)';
   showSlider();
 };
@@ -218,10 +229,10 @@ var applyChrome = function () {
 // применение эффекта sepia
 var sepiaRadio = document.querySelector('#upload-effect-sepia');
 sepiaRadio.addEventListener('click', function () {
-  applySepia();
+  applyEffectSepia();
 });
 
-var applySepia = function () {
+var applyEffectSepia = function () {
   imagePreview.style.filter = 'sepia(0.5)';
   showSlider();
 };
@@ -229,10 +240,10 @@ var applySepia = function () {
 // применение эффекта marvin
 var marvinRadio = document.querySelector('#upload-effect-marvin');
 marvinRadio.addEventListener('click', function () {
-  applyMarvin();
+  applyEffectMarvin();
 });
 
-var applyMarvin = function () {
+var applyEffectMarvin = function () {
   imagePreview.style.filter = 'invert(75%)';
   showSlider();
 };
@@ -240,10 +251,10 @@ var applyMarvin = function () {
 // применение эффекта fobos
 var phobosRadio = document.querySelector('#upload-effect-phobos');
 phobosRadio.addEventListener('click', function () {
-  applyPhobos();
+  applyEffectPhobos();
 });
 
-var applyPhobos = function () {
+var applyEffectPhobos = function () {
   imagePreview.style.filter = 'blur(3px)';
   showSlider();
 };
@@ -251,10 +262,10 @@ var applyPhobos = function () {
 // применение эффекта heat
 var heatRadio = document.querySelector('#upload-effect-heat');
 heatRadio.addEventListener('click', function () {
-  applyHeat();
+  applyEffectHeat();
 });
 
-var applyHeat = function () {
+var applyEffectHeat = function () {
   imagePreview.style.filter = 'brightness(3)';
   showSlider();
 };
@@ -263,6 +274,7 @@ var applyHeat = function () {
 // ==================================ВАЛИДАЦИЯ==================================
 
 var hashtagsInput = editImageOverlay.querySelector('.upload-form-hashtags'); // окно хештегов
+
 var isValidHashtags = function () { // функция валидации
   var hashtags = hashtagsInput.value.toLowerCase().split(' ');
 
@@ -291,7 +303,7 @@ var isValidHashtags = function () { // функция валидации
   return true;
 };
 
-var form = document.querySelector('upload-form');
+var form = document.querySelector('.upload-form');
 form.addEventListener('submit', function (evt) {
   if (!isValidHashtags()) {
     evt.preventDefault();
