@@ -64,17 +64,17 @@ var createPhotoElement = function (photo) {
 // функция открытия полноэкранного изображения
 var openOverlay = function () {
   overlay.classList.remove('hidden');
-  document.addEventListener('keydown', onPopupEscPress);
+  document.addEventListener('keydown', closeOverlayOnEsc);
 };
 
 // функция закрытия полноэкранного изображения
 var closeOverlay = function () {
   overlay.classList.add('hidden');
-  document.removeEventListener('keydown', onPopupEscPress);
+  document.removeEventListener('keydown', closeOverlayOnEsc);
 };
 
-// добавим закрытия окна на esc
-var onPopupEscPress = function (evt) {
+// закрытие на esc
+var closeOverlayOnEsc = function (evt) {
   if (evt.keyCode === ESC_KEYCODE) {
     closeOverlay();
   }
@@ -100,12 +100,10 @@ var renderMainPhoto = function (photo) {
   overlay.querySelector('.gallery-overlay-image').src = photo.url;
   overlay.querySelector('.likes-count').textContent = photo.likes;
   overlay.querySelector('.comments-count').textContent = photo.comments.length;
-
   // добавим обработчики для закрытия полноэкранного изображения на крестик
   closeOverlayButton.addEventListener('click', function () {
     closeOverlay();
   });
-
   //  добавим возможность закрытия окна после tab на крестик и enter
   closeOverlayButton.addEventListener('keydown', function (evt) {
     if (evt.keyCode === ENTER_KEYCODE) {
@@ -140,20 +138,28 @@ var closeForm = function () {
 
 fileInput.addEventListener('change', function () {
   openForm();
+  document.addEventListener('keydown', closeFormOnEsc);
 });
 
 //  закроем форму редактирования нажатием на #upload-cancel
 closeImageOverlay.addEventListener('click', function () {
   closeForm();
+  document.removeEventListener('keydown', closeFormOnEsc);
 });
+
+var closeFormOnEsc = function (evt) {
+  if (evt.keyCode === ESC_KEYCODE) {
+    closeForm();
+  }
+};
 
 
 // ============================= МАСШТАБИРОВАНИЕ =============================
 
-var imagePreview = document.querySelector('.effect-image-preview'); // изображение
-var size = document.querySelector('.upload-resize-controls-value'); // поле для изменения, должно измениться при нажатии на кнопки
-var sizeInc = document.querySelector('.upload-resize-controls-button-inc'); // кнопка плюс
-var sizeDec = document.querySelector('.upload-resize-controls-button-dec'); // кнопка минус
+var imagePreview = editImageOverlay.querySelector('.effect-image-preview'); // изображение
+var size = editImageOverlay.querySelector('.upload-resize-controls-value'); // поле для изменения, должно измениться при нажатии на кнопки
+var sizeInc = editImageOverlay.querySelector('.upload-resize-controls-button-inc'); // кнопка плюс
+var sizeDec = editImageOverlay.querySelector('.upload-resize-controls-button-dec'); // кнопка минус
 
 // напишем функцию для изменения размера изображения
 var imagePreviewScale = function () {
@@ -205,15 +211,11 @@ var hideSlider = function () {
 };
 
 // убрать эффекты
-var noneRadio = document.querySelector('#upload-effect-none');
-noneRadio.addEventListener('click', function () {
-  dis();
-});
-
-var dis = function () {
+var disableEffect = document.querySelector('#upload-effect-none');
+disableEffect.addEventListener('click', function () {
   imagePreview.style.filter = '';
   hideSlider();
-};
+});
 
 // применение эффекта хром
 var chromeRadio = document.querySelector('#upload-effect-chrome');
@@ -282,13 +284,11 @@ var isValidHashtags = function () { // функция валидации
     hashtagsInput.setCustomValidity('Максимальное количество хештегов ЭТО ПЯТЬ!');
     return false;
   }
-
   for (var i = 0; i < hashtags.length; i++) {
     if (hashtags[i].lastIndexOf('#') === 0) {
       hashtagsInput.setCustomValidity('Истину найдешь в решточке #');
       return false;
     }
-
     if (hashtags[i].length > HASHTAG_MAX_LENGTH) {
       hashtagsInput.setCustomValidity('Слишком много букаф, попробуй меньше ' + HASHTAG_MAX_LENGTH + '');
       return false;
@@ -298,7 +298,6 @@ var isValidHashtags = function () { // функция валидации
       return false;
     }
   }
-
   hashtagsInput.setCustomValidity('');
   return true;
 };
@@ -309,10 +308,3 @@ form.addEventListener('submit', function (evt) {
     evt.preventDefault();
   }
 });
-
-
-//
-// var sendFormButton = editImageOverlay.querySelector('.upload-form-submit'); // кнопка для отправки формы
-// sendFormButton.addEventListener('click', function () {
-//   validateHashtags();
-// });
