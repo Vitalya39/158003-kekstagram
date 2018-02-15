@@ -1,6 +1,10 @@
 'use strict';
 
 (function () {
+  var PHOTOS_QUANTITY = 25;
+  var ENTER_KEYCODE = 13;
+  var ESC_KEYCODE = 27;
+
   var overlay = document.querySelector('.gallery-overlay');
   var closeOverlayButton = overlay.querySelector('.gallery-overlay-close');
   var photoTemplate = document.querySelector('#picture-template').content;
@@ -28,7 +32,7 @@
     return photoFragment;
   };
 
-  var photos = createPhotos(PHOTOS_QUANTITY);
+  var photos = window.createPhotos(PHOTOS_QUANTITY);
   photoBlock.appendChild(renderPhotos(photos));
 
   var renderMainPhoto = function (photo) {

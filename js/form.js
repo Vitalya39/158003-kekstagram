@@ -1,6 +1,7 @@
 'use strict';
 
 (function () {
+  var ESC_KEYCODE = 27;
   var fileInput = document.querySelector('#upload-file');
   var editImageOverlay = document.querySelector('.upload-overlay');
   var closeImageOverlay = editImageOverlay.querySelector('#upload-cancel');

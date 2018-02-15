@@ -9,11 +9,6 @@
     'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'
   ];
 
-  var PHOTOS_QUANTITY = 25;
-  var ESC_KEYCODE = 27;
-  var HASHTAG_MAX_LENGTH = 20;
-  var ENTER_KEYCODE = 13;
-
   var getRandomNum = function (min, max) {
     return Math.round(Math.random() * (max - min) + min);
   };
@@ -27,7 +22,7 @@
     return comments;
   };
 
-  var createPhotos = function (quantity) {
+  window.createPhotos = function (quantity) {
     var photos = [];
     for (var i = 0; i < quantity; i++) {
       var photo = {
