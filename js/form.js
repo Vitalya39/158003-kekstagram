@@ -134,18 +134,24 @@
     showSlider();
   };
 
-  var sliderLine = document.querySelector('.upload-effect-level-val'); // полоса перемещения
-  var sliderPin = document.querySelector('.upload-effect-level-pin'); // ползунок для перемещения
+  var sliderLine = document.querySelector('.upload-effect-level-line');
+  var sliderPin = sliderLine.querySelector('.upload-effect-level-pin');
 
   sliderPin.addEventListener('mousedown', function (evt) {
     evt.preventDefault();
-    var startCoordinateX = evt.clientX;
+    var startCoordinate = evt.clientX;
 
     var onMouseMove = function (moveEvt) {
       moveEvt.preventDefault();
-      var shift = startCoordinateX - moveEvt.clientX;
-      startCoordinateX = moveEvt.clientX;
-      sliderPin.style.left = (sliderPin.offsetLeft - shift) + 'px';
+      var shiftX = startCoordinate - moveEvt.clientX;
+      startCoordinate = moveEvt.clientX;
+      sliderPin.style.left = (sliderPin.offsetLeft - shiftX) + 'px';
+      if (sliderPin.offsetLeft - shiftX >= 456) {
+        sliderPin.style.left = 455 + 'px';
+      }
+      if (sliderPin.offsetLeft - shiftX <= 0) {
+        sliderPin.style.left = 1 + 'px';
+      }
     };
 
     var onMouseUp = function (upEvt) {
@@ -155,7 +161,7 @@
     };
 
     sliderLine.addEventListener('mousemove', onMouseMove);
-
     sliderLine.addEventListener('mouseup', onMouseUp);
   });
+
 })();
