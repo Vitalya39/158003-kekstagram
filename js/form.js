@@ -133,4 +133,29 @@
     imagePreview.style.filter = 'brightness(3)';
     showSlider();
   };
+
+  var sliderLine = document.querySelector('.upload-effect-level-val'); // полоса перемещения
+  var sliderPin = document.querySelector('.upload-effect-level-pin'); // ползунок для перемещения
+
+  sliderPin.addEventListener('mousedown', function (evt) {
+    evt.preventDefault();
+    var startCoordinateX = evt.clientX;
+
+    var onMouseMove = function (moveEvt) {
+      moveEvt.preventDefault();
+      var shift = startCoordinateX - moveEvt.clientX;
+      startCoordinateX = moveEvt.clientX;
+      sliderPin.style.left = (sliderPin.offsetLeft - shift) + 'px';
+    };
+
+    var onMouseUp = function (upEvt) {
+      upEvt.preventDefault();
+      sliderLine.removeEventListener('mousemove', onMouseMove);
+      sliderLine.removeEventListener('mouseup', onMouseUp);
+    };
+
+    sliderLine.addEventListener('mousemove', onMouseMove);
+
+    sliderLine.addEventListener('mouseup', onMouseUp);
+  });
 })();
