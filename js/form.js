@@ -134,8 +134,9 @@
     showSlider();
   };
 
-  var sliderLine = document.querySelector('.upload-effect-level-line');
-  var sliderPin = sliderLine.querySelector('.upload-effect-level-pin');
+  var sliderLine = document.querySelector('.upload-effect-level-line'); // полоса
+  var sliderPin = sliderLine.querySelector('.upload-effect-level-pin'); // слайдер
+  var sliderEffect = sliderLine.querySelector('.upload-effect-level-val'); // полоса заполнения
 
   sliderPin.addEventListener('mousedown', function (evt) {
     evt.preventDefault();
@@ -146,12 +147,13 @@
       var shiftX = startCoordinate - moveEvt.clientX;
       startCoordinate = moveEvt.clientX;
       sliderPin.style.left = (sliderPin.offsetLeft - shiftX) + 'px';
-      if (sliderPin.offsetLeft - shiftX >= 456) {
+      if (sliderPin.offsetLeft - shiftX >= 455) {
         sliderPin.style.left = 455 + 'px';
       }
       if (sliderPin.offsetLeft - shiftX <= 0) {
         sliderPin.style.left = 1 + 'px';
       }
+      sliderEffect.style.width = parseFloat(sliderPin.style.left) / 4.55 + '%';
     };
 
     var onMouseUp = function (upEvt) {
