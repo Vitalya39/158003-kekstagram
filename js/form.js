@@ -69,8 +69,6 @@
   });
 
   var slider = document.querySelector('.upload-effect-level');
-  var sliderPin = slider.querySelector('.upload-effect-level-pin'); // слайдер
-  var sliderEffect = slider.querySelector('.upload-effect-level-val'); // полоса заполнения
 
   var showSlider = function () {
     slider.classList.remove('hidden');
@@ -85,6 +83,15 @@
     hideSlider();
   });
 
+  var chromeRadio = document.querySelector('#upload-effect-chrome');
+  chromeRadio.addEventListener('click', function () {
+    applyEffectChrome();
+  });
+  var applyEffectChrome = function () {
+    imagePreview.style.filter = 'grayscale(0.5)';
+    showSlider();
+  };
+
   var sepiaRadio = document.querySelector('#upload-effect-sepia');
   sepiaRadio.addEventListener('click', function () {
     applyEffectSepia();
@@ -93,6 +100,7 @@
     imagePreview.style.filter = 'sepia(0.5)';
     showSlider();
   };
+
   var marvinRadio = document.querySelector('#upload-effect-marvin');
   marvinRadio.addEventListener('click', function () {
     applyEffectMarvin();
@@ -101,6 +109,7 @@
     imagePreview.style.filter = 'invert(75%)';
     showSlider();
   };
+
   var phobosRadio = document.querySelector('#upload-effect-phobos');
   phobosRadio.addEventListener('click', function () {
     applyEffectPhobos();
@@ -109,6 +118,7 @@
     imagePreview.style.filter = 'blur(3px)';
     showSlider();
   };
+
   var heatRadio = document.querySelector('#upload-effect-heat');
   heatRadio.addEventListener('click', function () {
     applyEffectHeat();
