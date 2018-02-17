@@ -134,9 +134,8 @@
     showSlider();
   };
 
-  var sliderLine = document.querySelector('.upload-effect-level-line'); // полоса
-  var sliderPin = sliderLine.querySelector('.upload-effect-level-pin'); // слайдер
-  var sliderEffect = sliderLine.querySelector('.upload-effect-level-val'); // полоса заполнения
+  var sliderPin = slider.querySelector('.upload-effect-level-pin'); // слайдер
+  var sliderEffect = slider.querySelector('.upload-effect-level-val'); // полоса заполнения
 
   sliderPin.addEventListener('mousedown', function (evt) {
     evt.preventDefault();
@@ -158,12 +157,12 @@
 
     var onMouseUp = function (upEvt) {
       upEvt.preventDefault();
-      sliderLine.removeEventListener('mousemove', onMouseMove);
-      sliderLine.removeEventListener('mouseup', onMouseUp);
+      slider.removeEventListener('mousemove', onMouseMove);
+      slider.removeEventListener('mouseup', onMouseUp);
     };
 
-    sliderLine.addEventListener('mousemove', onMouseMove);
-    sliderLine.addEventListener('mouseup', onMouseUp);
+    slider.addEventListener('mousemove', onMouseMove);
+    slider.addEventListener('mouseup', onMouseUp);
   });
 
 })();
