@@ -22,7 +22,7 @@
       if (sliderPin.offsetLeft - shiftX <= MIN_SLIDER_VALUE) {
         sliderPin.style.left = MIN_SLIDER_VALUE + 'px';
       }
-      sliderEffect.style.width = parseFloat(sliderPin.style.left) / 4.55 + '%';
+      sliderEffect.style.width = parseFloat(sliderPin.style.left) / (MAX_SLIDER_VALUE / 100) + '%';
     };
     var onMouseUp = function (upEvt) {
       upEvt.preventDefault();

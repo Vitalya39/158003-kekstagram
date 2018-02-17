@@ -1,7 +1,6 @@
 'use strict';
 
 (function () {
-  var ESC_KEYCODE = 27;
   var fileInput = document.querySelector('#upload-file');
   var editImageOverlay = document.querySelector('.upload-overlay');
   var closeImageOverlay = editImageOverlay.querySelector('#upload-cancel');
@@ -26,7 +25,7 @@
   });
 
   var closeFormOnEsc = function (evt) {
-    if (evt.keyCode === ESC_KEYCODE) {
+    if (evt.keyCode === window.util.ESC_KEYCODE) {
       closeForm();
     }
   };
@@ -85,14 +84,7 @@
     imagePreview.style.filter = '';
     hideSlider();
   });
-  var chromeRadio = document.querySelector('#upload-effect-chrome');
-  chromeRadio.addEventListener('click', function () {
-    applyEffectChrome();
-  });
-  var applyEffectChrome = function () {
-    imagePreview.style.filter = 'grayscale(0.5)';
-    showSlider();
-  };
+
   var sepiaRadio = document.querySelector('#upload-effect-sepia');
   sepiaRadio.addEventListener('click', function () {
     applyEffectSepia();

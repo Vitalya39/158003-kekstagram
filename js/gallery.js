@@ -1,10 +1,6 @@
 'use strict';
 
 (function () {
-  var PHOTOS_QUANTITY = 25;
-  var ENTER_KEYCODE = 13;
-  var ESC_KEYCODE = 27;
-
   var overlay = document.querySelector('.gallery-overlay');
   var closeOverlayButton = overlay.querySelector('.gallery-overlay-close');
   var photoTemplate = document.querySelector('#picture-template').content;
@@ -32,7 +28,7 @@
     return photoFragment;
   };
 
-  var photos = window.createPhotos(PHOTOS_QUANTITY);
+  var photos = window.createPhotos(window.util.PHOTOS_QUANTITY);
   photoBlock.appendChild(renderPhotos(photos));
 
   var renderMainPhoto = function (photo) {
@@ -43,7 +39,7 @@
       closeOverlay();
     });
     closeOverlayButton.addEventListener('keydown', function (evt) {
-      if (evt.keyCode === ENTER_KEYCODE) {
+      if (evt.keyCode === window.util.ENTER_KEYCODE) {
         closeOverlay();
       }
     });
@@ -60,7 +56,7 @@
   };
 
   var closeOverlayOnEsc = function (evt) {
-    if (evt.keyCode === ESC_KEYCODE) {
+    if (evt.keyCode === window.util.ESC_KEYCODE) {
       closeOverlay();
     }
   };
