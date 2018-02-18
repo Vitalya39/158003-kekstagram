@@ -1,6 +1,10 @@
 'use strict';
 
 (function () {
+  var STEP_VALUE = 25;
+  var MAX_SIZE_VALUE = 100;
+  var MIN_SIZE_VALUE = 0;
+
   var imagePreview = document.querySelector('.effect-image-preview');
   var size = document.querySelector('.upload-resize-controls-value');
   var sizeInc = document.querySelector('.upload-resize-controls-button-inc');
@@ -8,15 +12,15 @@
 
   var imagePreviewScale = function () {
     var currentValue = parseInt(size.value, 10);
-    var scale = currentValue / 100;
+    var scale = currentValue / MAX_SIZE_VALUE;
     imagePreview.style.transform = 'scale(' + scale + ')';
   };
 
   var increaseSize = function () {
     var currentValue = parseInt(size.value, 10);
-    size.value = currentValue + 25 + '%';
-    if (parseInt(size.value, 10) > 100) {
-      size.value = 100 + '%';
+    size.value = currentValue + STEP_VALUE + '%';
+    if (parseInt(size.value, 10) > MAX_SIZE_VALUE) {
+      size.value = MAX_SIZE_VALUE + '%';
     }
     imagePreviewScale();
   };
@@ -28,9 +32,9 @@
 
   var decreseSize = function () {
     var commonValue = parseInt(size.value, 10);
-    size.value = commonValue - 25 + '%';
-    if (parseInt(size.value, 10) < 0) {
-      size.value = 0 + '%';
+    size.value = commonValue - STEP_VALUE + '%';
+    if (parseInt(size.value, 10) < MIN_SIZE_VALUE) {
+      size.value = MIN_SIZE_VALUE + '%';
     }
     imagePreviewScale();
   };

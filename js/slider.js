@@ -1,7 +1,6 @@
 'use strict';
 
 (function () {
-  var MAX_SLIDER_VALUE = 455;
   var MIN_SLIDER_VALUE = 1;
   var slider = document.querySelector('.upload-effect-level');
   var sliderPin = slider.querySelector('.upload-effect-level-pin'); // слайдер
@@ -16,14 +15,14 @@
       var shiftX = startCoordinate - moveEvt.clientX;
       startCoordinate = moveEvt.clientX;
       sliderPin.style.left = (sliderPin.offsetLeft - shiftX) + 'px';
-      if (sliderPin.offsetLeft - shiftX >= MAX_SLIDER_VALUE) {
-        sliderPin.style.left = MAX_SLIDER_VALUE + 'px';
+      if (sliderPin.offsetLeft - shiftX >= window.util.MAX_SLIDER_VALUE) {
+        sliderPin.style.left = window.util.MAX_SLIDER_VALUE + 'px';
       }
       if (sliderPin.offsetLeft - shiftX <= MIN_SLIDER_VALUE) {
         sliderPin.style.left = MIN_SLIDER_VALUE + 'px';
       }
-      window.effectValue(sliderPin.offsetLeft - shiftX);
-      sliderEffect.style.width = parseFloat(sliderPin.style.left) / (MAX_SLIDER_VALUE / 100) + '%';
+      window.setEffectValue(sliderPin.offsetLeft - shiftX);
+      sliderEffect.style.width = parseFloat(sliderPin.style.left) / (window.util.MAX_SLIDER_VALUE / 100) + '%';
     };
     var onMouseUp = function (upEvt) {
       upEvt.preventDefault();

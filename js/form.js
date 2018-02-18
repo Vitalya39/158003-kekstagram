@@ -15,9 +15,7 @@
   };
 
   var closeFormOnEsc = function (evt) {
-    if (evt.keyCode === window.util.ESC_KEYCODE) {
-      closeForm();
-    }
+    window.util.deactivationEvent(evt, closeForm);
   };
 
   fileInput.addEventListener('change', function () {

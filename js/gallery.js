@@ -39,9 +39,7 @@
       closeOverlay();
     });
     closeOverlayButton.addEventListener('keydown', function (evt) {
-      if (evt.keyCode === window.util.ENTER_KEYCODE) {
-        closeOverlay();
-      }
+      window.util.activationEvent(evt, closeOverlay);
     });
   };
 
@@ -56,8 +54,6 @@
   };
 
   var closeOverlayOnEsc = function (evt) {
-    if (evt.keyCode === window.util.ESC_KEYCODE) {
-      closeOverlay();
-    }
+    window.util.deactivationEvent(evt, closeOverlay);
   };
 })();
