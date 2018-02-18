@@ -16,7 +16,8 @@
     slider.classList.add('hidden');
   };
 
-  var applyFilter = function (filterName) {
+  var currentEffect;
+  var switchFilter = function (filterName) {
     imagePreview.classList = '';
     imagePreview.style.filter = '';
     imagePreview.classList.add('effect-' + filterName);
@@ -27,35 +28,36 @@
     } else {
       showSlider();
     }
-    window.currentEffect = filterName;
+    currentEffect = filterName;
+    return currentEffect;
   };
 
   var onFilterChange = function (evt) {
     if (evt.target.type === 'radio') {
-      applyFilter(evt.target.value);
+      switchFilter(evt.target.value);
     }
   };
 
   formsField.addEventListener('click', onFilterChange);
 
   // напишем функцию которая меняет уровень насыщенности, в качестве параметров изменение значения и название эффекта
-  window.effectValue = function (shift, effectName) {
-    if (effectName === 'none') {
+  window.effectValue = function (shift) {
+    if (currentEffect === 'none') {
       imagePreview.style.filter = 'none';
     }
-    if (effectName === 'chrome') {
+    if (currentEffect === 'chrome') {
       document.querySelector('.effect-chrome').style.filter = 'grayscale(' + shift / MAX_SLIDER_VALUE + ')';
     }
-    if (effectName === 'sepia') {
+    if (currentEffect === 'sepia') {
       document.querySelector('.effect-sepia').style.filter = 'sepia(' + shift / MAX_SLIDER_VALUE + ')';
     }
-    if (effectName === 'marvin') {
+    if (currentEffect === 'marvin') {
       document.querySelector('.effect-marvin').style.filter = 'invert(' + shift / 4.55 + '%)';
     }
-    if (effectName === 'phobos') {
+    if (currentEffect === 'phobos') {
       document.querySelector('.effect-phobos').style.filter = 'blur(' + shift / (MAX_SLIDER_VALUE / 3) + 'px)';
     }
-    if (effectName === 'heat') {
+    if (currentEffect === 'heat') {
       document.querySelector('.effect-heat').style.filter = 'brightness(' + shift * (MAX_SLIDER_VALUE / 3) + ')';
     }
   };
