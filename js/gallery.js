@@ -28,8 +28,7 @@
     return photoFragment;
   };
 
-  var photos = window.createPhotos(window.util.PHOTOS_QUANTITY);
-  photoBlock.appendChild(renderPhotos(photos));
+  photoBlock.appendChild(renderPhotos(window.data));
 
   var renderMainPhoto = function (photo) {
     overlay.querySelector('.gallery-overlay-image').src = photo.url;

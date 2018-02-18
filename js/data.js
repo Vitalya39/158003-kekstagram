@@ -22,8 +22,7 @@
     return comments;
   };
 
-
-  window.createPhotos = function (quantity) {
+  var createPhotos = function (quantity) {
     var photos = [];
     for (var i = 0; i < quantity; i++) {
       var photo = {
@@ -35,4 +34,6 @@
     }
     return photos;
   };
+
+  window.data = createPhotos(window.util.PHOTOS_QUANTITY);
 })();
