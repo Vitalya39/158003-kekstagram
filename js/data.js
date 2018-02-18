@@ -22,6 +22,7 @@
     return comments;
   };
 
+
   window.createPhotos = function (quantity) {
     var photos = [];
     for (var i = 0; i < quantity; i++) {

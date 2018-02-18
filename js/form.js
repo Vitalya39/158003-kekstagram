@@ -77,55 +77,32 @@
     slider.classList.add('hidden');
   };
 
-  var disableEffect = document.querySelector('#upload-effect-none');
-  disableEffect.addEventListener('click', function () {
+  var sliderPin = slider.querySelector('.upload-effect-level-pin'); // слайдер
+  var sliderEffect = slider.querySelector('.upload-effect-level-val'); // полоса заполнения
+
+
+  var applyFilter = function (filterName) {
+    imagePreview.classList = '';
     imagePreview.style.filter = '';
-    hideSlider();
-  });
-
-  var chromeRadio = document.querySelector('#upload-effect-chrome');
-  chromeRadio.addEventListener('click', function () {
-    applyEffectChrome();
-  });
-  var applyEffectChrome = function () {
-    imagePreview.style.filter = 'grayscale(0.5)';
-    showSlider();
+    imagePreview.classList.add('effect-' + filterName);
+    sliderPin.style.left = 455 + 'px';
+    sliderEffect.style.width = '100%';
+    if (filterName === 'none') {
+      hideSlider();
+    } else {
+      showSlider();
+    }
+    window.currentEffect = filterName;
   };
 
-  var sepiaRadio = document.querySelector('#upload-effect-sepia');
-  sepiaRadio.addEventListener('click', function () {
-    applyEffectSepia();
-  });
-  var applyEffectSepia = function () {
-    imagePreview.style.filter = 'sepia(0.5)';
-    showSlider();
+  // функция которая определит по какому элементу мы кликнули и подставит его value в предыдущую функцию
+  var onFilterChange = function (evt) {
+    if (evt.target.type === 'radio') {
+      applyFilter(evt.target.value);
+    }
   };
 
-  var marvinRadio = document.querySelector('#upload-effect-marvin');
-  marvinRadio.addEventListener('click', function () {
-    applyEffectMarvin();
-  });
-  var applyEffectMarvin = function () {
-    imagePreview.style.filter = 'invert(75%)';
-    showSlider();
-  };
-
-  var phobosRadio = document.querySelector('#upload-effect-phobos');
-  phobosRadio.addEventListener('click', function () {
-    applyEffectPhobos();
-  });
-  var applyEffectPhobos = function () {
-    imagePreview.style.filter = 'blur(3px)';
-    showSlider();
-  };
-
-  var heatRadio = document.querySelector('#upload-effect-heat');
-  heatRadio.addEventListener('click', function () {
-    applyEffectHeat();
-  });
-  var applyEffectHeat = function () {
-    imagePreview.style.filter = 'brightness(3)';
-    showSlider();
-  };
-
+  // найдем элемент в котором лежат радиокнопки с фильтрами
+  var formsField = document.querySelector('.upload-effect-controls');
+  formsField.addEventListener('click', onFilterChange);
 })();
