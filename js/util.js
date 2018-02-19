@@ -16,6 +16,6 @@
       }
     },
     PHOTOS_QUANTITY: 26,
-    MAX_SLIDER_VALUE: 455
+    MAX_SLIDER_VALUE: 456
   };
 })();
