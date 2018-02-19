@@ -40,23 +40,25 @@
   formsField.addEventListener('click', onFilterChange);
 
   window.setEffectValue = function (shift) {
-    if (currentEffect === 'none') {
-      imagePreview.style.filter = 'none';
-    }
-    if (currentEffect === 'chrome') {
-      document.querySelector('.effect-chrome').style.filter = 'grayscale(' + shift / window.util.MAX_SLIDER_VALUE + ')';
-    }
-    if (currentEffect === 'sepia') {
-      document.querySelector('.effect-sepia').style.filter = 'sepia(' + shift / window.util.MAX_SLIDER_VALUE + ')';
-    }
-    if (currentEffect === 'marvin') {
-      document.querySelector('.effect-marvin').style.filter = 'invert(' + shift / (window.util.MAX_SLIDER_VALUE / 100) + '%)';
-    }
-    if (currentEffect === 'phobos') {
-      document.querySelector('.effect-phobos').style.filter = 'blur(' + shift / (window.util.MAX_SLIDER_VALUE / 3) + 'px)';
-    }
-    if (currentEffect === 'heat') {
-      document.querySelector('.effect-heat').style.filter = 'brightness(' + shift / (window.util.MAX_SLIDER_VALUE / 3) + ')';
+    switch (currentEffect) {
+      case 'none':
+        imagePreview.style.filter = 'none';
+        break;
+      case 'chrome':
+        imagePreview.style.filter = 'grayscale(' + shift / window.util.MAX_SLIDER_VALUE + ')';
+        break;
+      case 'sepia':
+        imagePreview.style.filter = 'sepia(' + shift / window.util.MAX_SLIDER_VALUE + ')';
+        break;
+      case 'marvin':
+        imagePreview.style.filter = 'invert(' + shift / (window.util.MAX_SLIDER_VALUE / 100) + '%)';
+        break;
+      case 'phobos':
+        imagePreview.style.filter = 'blur(' + shift / (window.util.MAX_SLIDER_VALUE / 3) + 'px)';
+        break;
+      case 'heat':
+        imagePreview.style.filter = 'brightness(' + shift / (window.util.MAX_SLIDER_VALUE / 3) + ')';
+        break;
     }
   };
 
