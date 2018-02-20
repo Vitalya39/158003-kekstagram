@@ -2,9 +2,9 @@
 
 (function () {
   var HASHTAG_MAX_LENGTH = 20;
-  var hashtagsInput = document.querySelector('.upload-form-hashtags'); // окно хештегов
+  var hashtagsInput = document.querySelector('.upload-form-hashtags');
 
-  var isValidHashtags = function () { // функция валидации
+  var isValidHashtags = function () {
     var hashtags = hashtagsInput.value.toLowerCase().split(' ');
 
     if (hashtags.length > 5) {
