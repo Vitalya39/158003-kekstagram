@@ -8,7 +8,7 @@
     'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
     'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'
   ];
-
+  var PHOTOS_QUANTITY = 25;
   var getRandomNum = function (min, max) {
     return Math.round(Math.random() * (max - min) + min);
   };
@@ -35,5 +35,5 @@
     return photos;
   };
 
-  window.data = createPhotos(window.util.PHOTOS_QUANTITY);
+  window.data = createPhotos(PHOTOS_QUANTITY);
 })();

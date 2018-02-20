@@ -4,18 +4,20 @@
   var ESC_KEYCODE = 27;
   var ENTER_KEYCODE = 13;
 
+  var activationEvent = function (evt, action) {
+    if (evt.keyCode === ENTER_KEYCODE) {
+      action();
+    }
+  };
+
+  var deactivationEvent = function (evt, action) {
+    if (evt.keyCode === ESC_KEYCODE) {
+      action();
+    }
+  };
+
   window.util = {
-    activationEvent: function (evt, action) {
-      if (evt.keyCode === ENTER_KEYCODE) {
-        action();
-      }
-    },
-    deactivationEvent: function (evt, action) {
-      if (evt.keyCode === ESC_KEYCODE) {
-        action();
-      }
-    },
-    PHOTOS_QUANTITY: 26,
-    MAX_SLIDER_VALUE: 456
+    activationEvent: activationEvent,
+    deactivationEvent: deactivationEvent
   };
 })();
