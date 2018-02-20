@@ -3,16 +3,10 @@
 (function () {
   var MAX_SLIDER_VALUE = 456;
   var MIN_SLIDER_VALUE = 0;
+
   var slider = document.querySelector('.upload-effect-level');
   var sliderPin = slider.querySelector('.upload-effect-level-pin'); // слайдер
   var sliderEffect = slider.querySelector('.upload-effect-level-val'); // полоса заполнения
-
-  window.slider = {
-    initSlider: initSlider,
-    showSlider: showSlider,
-    hideSlider: hideSlider,
-    resetSlider: resetSlider,
-  };
 
   // функция движения слайдера
   var initSlider = function (callback) {
@@ -57,6 +51,13 @@
   var resetSlider = function (value) {
     sliderPin.style.left = value;
     sliderEffect.style.width = value;
+  };
+
+  window.slider = {
+    initSlider: initSlider,
+    showSlider: showSlider,
+    hideSlider: hideSlider,
+    resetSlider: resetSlider,
   };
 
 

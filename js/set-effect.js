@@ -27,6 +27,7 @@
   };
 
   formsField.addEventListener('click', onFilterChange);
+
   var setEffectValue = function (shift) {
     switch (currentEffect) {
       case 'none':
