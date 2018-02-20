@@ -7,6 +7,7 @@
 
   var openForm = function () {
     editImageOverlay.classList.remove('hidden');
+    window.slider.hideSlider();
   };
 
   var closeForm = function () {
