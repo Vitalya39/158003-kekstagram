@@ -1,9 +1,9 @@
 'use strict';
 
 (function () {
-  var overlay = document.querySelector('.gallery-overlay');
-  var closeOverlayButton = overlay.querySelector('.gallery-overlay-close');
+  var PHOTOS_QUANTITY = 25;
   var photoTemplate = document.querySelector('#picture-template').content;
+  var photoBlock = document.querySelector('.pictures');
 
   var createPhotoElement = function (photo) {
     var photoElement = photoTemplate.querySelector('.picture').cloneNode(true);
@@ -12,47 +12,36 @@
     photoElement.querySelector('.picture-comments').textContent = photo.comments.length;
     photoElement.addEventListener('click', function (evt) {
       evt.preventDefault();
-      renderMainPhoto(photo);
-      openOverlay();
+      window.galleryMain.renderMainPhoto(photo);
+      window.galleryMain.openOverlay();
     });
     return photoElement;
   };
 
-  var photoBlock = document.querySelector('.pictures');
-
-  var renderPhotos = function (photos) {
+  var renderPhotos = function (photos, quantity) {
     var photoFragment = document.createDocumentFragment();
-    for (var i = 0; i < photos.length; i++) {
+    for (var i = 0; i < quantity; i++) {
       photoFragment.appendChild(createPhotoElement(photos[i]));
     }
-    return photoFragment;
+    photoBlock.appendChild(photoFragment);
   };
 
-  photoBlock.appendChild(renderPhotos(window.data));
-
-  var renderMainPhoto = function (photo) {
-    overlay.querySelector('.gallery-overlay-image').src = photo.url;
-    overlay.querySelector('.likes-count').textContent = photo.likes;
-    overlay.querySelector('.comments-count').textContent = photo.comments.length;
-    closeOverlayButton.addEventListener('click', function () {
-      closeOverlay();
-    });
-    closeOverlayButton.addEventListener('keydown', function (evt) {
-      window.util.activationEvent(evt, closeOverlay);
-    });
+  var onSuccesdownload = function (data) {
+    renderPhotos(data, PHOTOS_QUANTITY);
   };
 
-  var openOverlay = function () {
-    overlay.classList.remove('hidden');
-    document.addEventListener('keydown', closeOverlayOnEsc);
+  var onErrorDownload = function (errorMessage) {
+    var node = document.createElement('div');
+    node.style = 'z-index: 100; margin: 0 auto; text-align: center; background-color: red;';
+    node.style.position = 'absolute';
+    node.style.left = 0;
+    node.style.right = 0;
+    node.style.fontSize = '30px';
+
+    node.textContent = errorMessage;
+    document.body.insertAdjacentElement('afterbegin', node);
   };
 
-  var closeOverlay = function () {
-    overlay.classList.add('hidden');
-    document.removeEventListener('keydown', closeOverlayOnEsc);
-  };
+  window.backend.load(onSuccesdownload, onErrorDownload);
 
-  var closeOverlayOnEsc = function (evt) {
-    window.util.deactivationEvent(evt, closeOverlay);
-  };
 })();
