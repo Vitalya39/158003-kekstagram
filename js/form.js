@@ -13,7 +13,7 @@
 
   var closeForm = function () {
     editImageOverlay.classList.add('hidden');
-    editImageOverlay.reset();
+    form.reset();
   };
 
   var closeFormOnEsc = function (evt) {
