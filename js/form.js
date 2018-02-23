@@ -50,7 +50,7 @@
 
   var onFormClick = function (evt) {
     evt.preventDefault();
-    if (window.validity.isValidHashtags()) {
+    if (!window.validity.isValidHashtags()) {
       window.backend.upload(new FormData(form), onSuccessSend, onErrorSend);
     }
   };

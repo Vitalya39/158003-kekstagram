@@ -29,13 +29,6 @@
     return true;
   };
 
-  var form = document.querySelector('.upload-form');
-  form.addEventListener('submit', function (evt) {
-    if (!isValidHashtags()) {
-      evt.preventDefault();
-    }
-  });
-
   window.validity = {
     isValidHashtags: isValidHashtags
   };
