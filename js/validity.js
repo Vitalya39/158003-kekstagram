@@ -35,4 +35,9 @@
       evt.preventDefault();
     }
   });
+
+  window.validity = {
+    isValidHashtags: isValidHashtags
+  };
+
 })();
