@@ -1,7 +1,6 @@
 'use strict';
 
 (function () {
-  var PHOTOS_QUANTITY = 25;
   var photoTemplate = document.querySelector('#picture-template').content;
   var photoBlock = document.querySelector('.pictures');
 
@@ -18,16 +17,16 @@
     return photoElement;
   };
 
-  var renderPhotos = function (photos, quantity) {
+  var renderPhotos = function (photos) {
     var photoFragment = document.createDocumentFragment();
-    for (var i = 0; i < quantity; i++) {
+    for (var i = 0; i < photos.length; i++) {
       photoFragment.appendChild(createPhotoElement(photos[i]));
     }
     photoBlock.appendChild(photoFragment);
   };
 
   var onSuccesdownload = function (data) {
-    renderPhotos(data, PHOTOS_QUANTITY);
+    renderPhotos(data);
   };
 
   var onErrorDownload = function (errorMessage) {
