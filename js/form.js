@@ -4,6 +4,7 @@
   var fileInput = document.querySelector('#upload-file');
   var editImageOverlay = document.querySelector('.upload-overlay');
   var closeImageOverlay = editImageOverlay.querySelector('#upload-cancel');
+  var hashtagsInput = document.querySelector('.upload-form-hashtags');
   var form = document.querySelector('.upload-form');
 
   var openForm = function () {
@@ -14,6 +15,8 @@
   var closeForm = function () {
     editImageOverlay.classList.add('hidden');
     form.reset();
+    hashtagsInput.setCustomValidity('');
+    hashtagsInput.style.border = '';
   };
 
   var closeFormOnEsc = function (evt) {
@@ -30,28 +33,16 @@
     document.removeEventListener('keydown', closeFormOnEsc);
   });
 
-  form.addEventListener('submit', onFormClick);
-
   var onSuccessSend = function () {
     closeForm();
   };
 
-  var onErrorSend = function (errorMessage) {
-    var node = document.createElement('div');
-    node.style = 'z-index: 100; margin: 0 auto; text-align: center; background-color: red;';
-    node.style.position = 'absolute';
-    node.style.left = 0;
-    node.style.right = 0;
-    node.style.fontSize = '30px';
-
-    node.textContent = errorMessage;
-    document.body.insertAdjacentElement('afterbegin', node);
-  };
-
   var onFormClick = function (evt) {
     evt.preventDefault();
-    if (!window.validity.isValidHashtags()) {
-      window.backend.upload(new FormData(form), onSuccessSend, onErrorSend);
+    if (window.validity.isValidHashtags() === true) {
+      window.backend.upload(new FormData(form), onSuccessSend, window.backend.error);
+    } else {
+      hashtagsInput.style.border = '3px solid red';
     }
   };
 
