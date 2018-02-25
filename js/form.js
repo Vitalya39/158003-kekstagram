@@ -39,6 +39,7 @@
 
   var onFormClick = function (evt) {
     evt.preventDefault();
+    hashtagsInput.setCustomValidity('');
     if (window.validity.isValidHashtags() === true) {
       window.backend.upload(new FormData(form), onSuccessSend, window.backend.error);
     } else {
