@@ -33,17 +33,10 @@
     document.removeEventListener('keydown', closeFormOnEsc);
   });
 
-  var onSuccessSend = function () {
-    closeForm();
-  };
-
   var onFormClick = function (evt) {
     evt.preventDefault();
-    hashtagsInput.setCustomValidity('');
     if (window.validity.isValidHashtags() === true) {
-      window.backend.upload(new FormData(form), onSuccessSend, window.backend.error);
-    } else {
-      hashtagsInput.style.border = '3px solid red';
+      window.backend.upload(new FormData(form), closeForm, window.backend.onErrorSend);
     }
   };
 
