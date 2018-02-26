@@ -4,6 +4,8 @@
   var fileInput = document.querySelector('#upload-file');
   var editImageOverlay = document.querySelector('.upload-overlay');
   var closeImageOverlay = editImageOverlay.querySelector('#upload-cancel');
+  var hashtagsInput = document.querySelector('.upload-form-hashtags');
+  var form = document.querySelector('.upload-form');
 
   var openForm = function () {
     editImageOverlay.classList.remove('hidden');
@@ -12,7 +14,9 @@
 
   var closeForm = function () {
     editImageOverlay.classList.add('hidden');
-    editImageOverlay.reset();
+    form.reset();
+    hashtagsInput.setCustomValidity('');
+    hashtagsInput.style.border = '';
   };
 
   var closeFormOnEsc = function (evt) {
@@ -28,5 +32,14 @@
     closeForm();
     document.removeEventListener('keydown', closeFormOnEsc);
   });
+
+  var onFormClick = function (evt) {
+    evt.preventDefault();
+    if (window.validity.isValidHashtags() === true) {
+      window.backend.upload(new FormData(form), closeForm, window.backend.onErrorSend);
+    }
+  };
+
+  form.addEventListener('submit', onFormClick);
 
 })();
