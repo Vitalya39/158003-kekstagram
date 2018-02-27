@@ -37,9 +37,6 @@
 
   window.backend.load(onSuccesdownload, window.backend.error);
 
-  // ------------------------------ СОРТИРОВКА ------------------------------
-  // найдем кнопки по клику на которые будет меняться сортировка изображений
-
   var sortOnClick = function (evt) {
     if (evt.target.type === 'radio') {
       var sortName = evt.target.value;
