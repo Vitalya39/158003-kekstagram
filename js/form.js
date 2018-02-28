@@ -35,7 +35,7 @@
 
   var onFormClick = function (evt) {
     evt.preventDefault();
-    if (window.validity.isValidHashtags() === true) {
+    if (window.validity.isValidHashtags) {
       window.backend.upload(new FormData(form), closeForm, window.backend.onErrorSend);
     }
   };
