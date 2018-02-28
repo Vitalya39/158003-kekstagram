@@ -5,10 +5,9 @@
   var MIN_SLIDER_VALUE = 0;
 
   var slider = document.querySelector('.upload-effect-level');
-  var sliderPin = slider.querySelector('.upload-effect-level-pin'); // слайдер
-  var sliderEffect = slider.querySelector('.upload-effect-level-val'); // полоса заполнения
+  var sliderPin = slider.querySelector('.upload-effect-level-pin');
+  var sliderEffect = slider.querySelector('.upload-effect-level-val');
 
-  // функция движения слайдера
   var initSlider = function (callback) {
     var onEffectLevelPinMousedown = function (evt) {
       evt.preventDefault();
@@ -36,7 +35,6 @@
       slider.addEventListener('mouseup', onMouseUp);
     };
 
-    // обработчик событий для пина слайдера
     sliderPin.addEventListener('mousedown', onEffectLevelPinMousedown);
   };
 
@@ -59,6 +57,5 @@
     hideSlider: hideSlider,
     resetSlider: resetSlider,
   };
-
 
 })();

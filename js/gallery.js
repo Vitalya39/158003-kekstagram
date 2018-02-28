@@ -45,7 +45,7 @@
         photoBlock.innerHTML = '';
         var data = filter[sortName](photosDataCopy);
         renderPhotos(data);
-      }, 1500);
+      }, 500);
     }
   };
 

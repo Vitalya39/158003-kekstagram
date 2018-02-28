@@ -1,19 +1,20 @@
 'use strict';
 
 (function () {
-  var fileInput = document.querySelector('#upload-file');
-  var editImageOverlay = document.querySelector('.upload-overlay');
-  var closeImageOverlay = editImageOverlay.querySelector('#upload-cancel');
-  var hashtagsInput = document.querySelector('.upload-form-hashtags');
   var form = document.querySelector('.upload-form');
+  var imageOverlay = form.querySelector('.upload-overlay');
+  var closeOverlayButton = form.querySelector('.upload-form-cancel');
+  var fileInput = form.querySelector('.upload-input');
+  var hashtagsInput = form.querySelector('.upload-form-hashtags');
+
 
   var openForm = function () {
-    editImageOverlay.classList.remove('hidden');
+    imageOverlay.classList.remove('hidden');
     window.slider.hideSlider();
   };
 
   var closeForm = function () {
-    editImageOverlay.classList.add('hidden');
+    imageOverlay.classList.add('hidden');
     form.reset();
     hashtagsInput.setCustomValidity('');
     hashtagsInput.style.border = '';
@@ -28,7 +29,7 @@
     document.addEventListener('keydown', closeFormOnEsc);
   });
 
-  closeImageOverlay.addEventListener('click', function () {
+  closeOverlayButton.addEventListener('click', function () {
     closeForm();
     document.removeEventListener('keydown', closeFormOnEsc);
   });
