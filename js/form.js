@@ -6,6 +6,7 @@
   var closeOverlayButton = form.querySelector('.upload-form-cancel');
   var fileInput = form.querySelector('.upload-input');
   var hashtagsInput = form.querySelector('.upload-form-hashtags');
+  var commentsInput = form.querySelector('.upload-form-description')
 
 
   var openForm = function () {
@@ -32,6 +33,10 @@
   closeOverlayButton.addEventListener('click', function () {
     closeForm();
     document.removeEventListener('keydown', closeFormOnEsc);
+  });
+
+  commentsInput.addEventListener('keydown', function (evt) {
+    evt.stopPropagation();
   });
 
   var onFormClick = function (evt) {
