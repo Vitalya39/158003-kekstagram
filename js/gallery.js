@@ -80,13 +80,14 @@
   };
 
   var randomSort = function (data) {
-    for (var i = data.length - 1; i > 0; i--) {
-      var num = Math.floor(Math.random() * (i + 1));
-      var d = data[num];
-      data[num] = data[i];
-      data[i] = d;
+    var dataCopy = data.slice();
+    var shuffledArray = [];
+    while (shuffledArray.length < dataCopy.length) {
+      var randomIndex = Math.floor(Math.random() * data.length);
+      shuffledArray.push(data[randomIndex]);
+      data.splice(randomIndex, 1);
     }
-    return data;
+    return shuffledArray;
   };
 
   var filter = {
