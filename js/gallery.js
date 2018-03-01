@@ -80,12 +80,12 @@
   };
 
   var randomSort = function (data) {
-    var dataCopy = data.slice();
     var shuffledArray = [];
-    while (shuffledArray.length < dataCopy.length) {
-      var randomIndex = Math.floor(Math.random() * data.length);
-      shuffledArray.push(data[randomIndex]);
-      data.splice(randomIndex, 1);
+    var dataCopy = data.slice();
+    while (dataCopy.length) {
+      var index = Math.floor(Math.random() * dataCopy.length);
+      var element = dataCopy.splice(index, 1)[0];
+      shuffledArray.push(element);
     }
     return shuffledArray;
   };
