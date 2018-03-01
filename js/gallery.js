@@ -54,25 +54,22 @@
   };
 
   var popularSort = function (data) {
-    data.sort(function (a, b) {
+    return data.sort(function (a, b) {
       return b.likes - a.likes;
     });
-    return data;
   };
 
   var discussedSort = function (data) {
-    data.sort(function (a, b) {
+    return data.sort(function (a, b) {
       return b.comments.length - a.comments.length;
     });
-    return data;
   };
 
   var randomSort = function (data) {
     var shuffledArray = [];
-    var dataCopy = data.slice();
-    while (dataCopy.length) {
-      var index = Math.floor(Math.random() * dataCopy.length);
-      var element = dataCopy.splice(index, 1)[0];
+    while (data.length) {
+      var index = Math.floor(Math.random() * data.length);
+      var element = data.splice(index, 1)[0];
       shuffledArray.push(element);
     }
     return shuffledArray;
