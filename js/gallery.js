@@ -99,4 +99,10 @@
 
   filtersField.addEventListener('click', sortOnClick);
 
+  filtersField.addEventListener('keydown', function (evt) {
+    window.util.activationEvent(evt, function () {
+      evt.target.click();
+    });
+  });
+
 })();

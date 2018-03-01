@@ -17,7 +17,7 @@
     }
     for (var i = 0; i < hashtags.length; i++) {
       if (hashtags[i].lastIndexOf('#') !== 0) {
-        hashtagsInput.setCustomValidity('Хештег должен начинаться с решеточки # и состоять из одного слова');
+        hashtagsInput.setCustomValidity('Хештег должен начинаться с решеточки # и разделяться пробелом');
         hashtagsInput.style.border = '3px solid red';
         return false;
       }
