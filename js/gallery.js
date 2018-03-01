@@ -55,26 +55,14 @@
 
   var popularSort = function (data) {
     data.sort(function (a, b) {
-      if (a.likes < b.likes) {
-        return 1;
-      } else if (a.likes > b.likes) {
-        return -1;
-      } else {
-        return b.comments.length - a.comments.length;
-      }
+      return b.likes - a.likes;
     });
     return data;
   };
 
   var discussedSort = function (data) {
     data.sort(function (a, b) {
-      if (a.comments.length < b.comments.length) {
-        return 1;
-      } else if (a.comments.length > b.comments.length) {
-        return -1;
-      } else {
-        return b.likes - a.likes;
-      }
+      return b.comments.length - a.comments.length;
     });
     return data;
   };
