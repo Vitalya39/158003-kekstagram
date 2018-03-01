@@ -29,7 +29,6 @@
     increaseSize();
   });
 
-
   var decreseSize = function () {
     var commonValue = parseInt(size.value, 10);
     size.value = commonValue - STEP_VALUE + '%';
@@ -42,4 +41,5 @@
   sizeDec.addEventListener('click', function () {
     decreseSize();
   });
+
 })();

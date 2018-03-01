@@ -27,6 +27,11 @@
   };
 
   formsField.addEventListener('click', onFilterChange);
+  formsField.addEventListener('keydown', function (evt) {
+    window.util.activationEvent(evt, function () {
+      evt.target.click();
+    });
+  });
 
   var setEffectValue = function (shift) {
     switch (currentEffect) {
