@@ -1,6 +1,7 @@
 'use strict';
 
 (function () {
+
   var overlay = document.querySelector('.gallery-overlay');
   var closeOverlayButton = overlay.querySelector('.gallery-overlay-close');
 

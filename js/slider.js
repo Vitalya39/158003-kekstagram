@@ -1,6 +1,7 @@
 'use strict';
 
 (function () {
+
   var MAX_SLIDER_VALUE = 456;
   var MIN_SLIDER_VALUE = 0;
 

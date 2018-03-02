@@ -1,6 +1,7 @@
 'use strict';
 
 (function () {
+
   var STEP_VALUE = 25;
   var MAX_SIZE_VALUE = 100;
   var MIN_SIZE_VALUE = 0;

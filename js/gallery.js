@@ -1,6 +1,7 @@
 'use strict';
 
 (function () {
+
   var photoTemplate = document.querySelector('#picture-template').content;
   var photoBlock = document.querySelector('.pictures');
   var filtersField = document.querySelector('.filters');

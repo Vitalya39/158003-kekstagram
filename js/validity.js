@@ -1,6 +1,7 @@
 'use strict';
 
 (function () {
+
   var HASHTAG_MAX_LENGTH = 20;
   var hashtagsInput = document.querySelector('.upload-form-hashtags');
 

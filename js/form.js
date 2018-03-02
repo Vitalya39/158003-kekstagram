@@ -1,6 +1,7 @@
 'use strict';
 
 (function () {
+
   var form = document.querySelector('.upload-form');
   var imageOverlay = form.querySelector('.upload-overlay');
   var closeOverlayButton = form.querySelector('.upload-form-cancel');
