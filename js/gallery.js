@@ -41,10 +41,9 @@
   var sortOnClick = function (evt) {
     if (evt.target.type === 'radio') {
       var sortName = evt.target.value;
-      var photosCopy = rawPhotos.slice();
       window.debounce(function () {
         photoBlock.innerHTML = '';
-        var photos = filter[sortName](photosCopy);
+        var photos = filter[sortName](rawPhotos.slice());
         renderPhotos(photos);
       }, 500);
     }

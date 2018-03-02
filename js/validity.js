@@ -17,34 +17,34 @@
       return true;
     }
     if (hashtags.length > HASHTAGS_MAX_QUANTITY) {
-      hashtagsInput.setCustomValidity('Максимальное количество хештегов ЭТО ' + HASHTAGS_MAX_QUANTITY + ' !');
+      hashtagsInput.setCustomValidity('Максимальное количество хештегов - ' + HASHTAGS_MAX_QUANTITY + '.');
       hashtagsInput.style.border = '3px solid red';
       return false;
     }
     for (var i = 0; i < hashtags.length; i++) {
       if (hashtags[i].lastIndexOf('#') !== 0) {
-        hashtagsInput.setCustomValidity('Хештеги должны начинаться с решеточки(#)!');
+        hashtagsInput.setCustomValidity('Хештеги должны начинаться с решетки(#).');
         hashtagsInput.style.border = '3px solid red';
         return false;
       }
       if (hashtags[i].length > HASHTAG_MAX_CHARACTERS) {
-        hashtagsInput.setCustomValidity('Слишком много букаф, попробуй меньше ' + HASHTAG_MAX_CHARACTERS + ' !');
+        hashtagsInput.setCustomValidity('Должно быть меньше ' + HASHTAG_MAX_CHARACTERS + ' букв');
         hashtagsInput.style.border = '3px solid red';
         return false;
       }
       if (hashtags[i].length <= HASHTAG_MIN_CHARACTERS) {
-        hashtagsInput.setCustomValidity('Таких маленьких хештегов не бывает! Должно быть не меньше ' + (HASHTAG_MIN_CHARACTERS + 1) + ' символов!');
+        hashtagsInput.setCustomValidity('В хештеге должно быть не меньше ' + (HASHTAG_MIN_CHARACTERS + 1) + ' символов');
         hashtagsInput.style.border = '3px solid red';
         return false;
       }
       if (hashtags.includes(hashtags[i], i + 1)) {
-        hashtagsInput.setCustomValidity('Не повторяйся!');
+        hashtagsInput.setCustomValidity('Хештеги не могут повторяться');
         hashtagsInput.style.border = '3px solid red';
         return false;
       }
     }
     hashtagsInput.setCustomValidity('');
-    hashtagsInput.style.border = '3px solid green';
+    hashtagsInput.style.border = '';
     return true;
   };
 
