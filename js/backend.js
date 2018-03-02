@@ -2,8 +2,10 @@
 
 (function () {
 
+  var POST_URL = 'https://js.dump.academy/kekstagram';
+  var GET_URL = 'https://js.dump.academy/kekstagram/data';
+
   var upload = function (data, onLoad, onError) {
-    var POST_URL = 'https://js.dump.academy/kekstagram';
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
 
@@ -20,7 +22,6 @@
   };
 
   var load = function (onLoad, onError) {
-    var GET_URL = 'https://js.dump.academy/kekstagram/data';
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
 

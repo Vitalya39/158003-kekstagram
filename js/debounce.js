@@ -10,4 +10,5 @@
     }
     lastTimeout = window.setTimeout(fun, interval);
   };
+
 })();

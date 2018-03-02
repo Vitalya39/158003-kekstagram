@@ -1,6 +1,7 @@
 'use strict';
 
 (function () {
+
   var ESC_KEYCODE = 27;
   var ENTER_KEYCODE = 13;
 
@@ -20,4 +21,5 @@
     activationEvent: activationEvent,
     deactivationEvent: deactivationEvent
   };
+
 })();

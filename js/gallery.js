@@ -1,10 +1,11 @@
 'use strict';
 
 (function () {
+
   var photoTemplate = document.querySelector('#picture-template').content;
   var photoBlock = document.querySelector('.pictures');
   var filtersField = document.querySelector('.filters');
-  var photosData = [];
+  var rawPhotos = [];
 
   var createPhotoElement = function (photo) {
     var photoElement = photoTemplate.querySelector('.picture').cloneNode(true);
@@ -27,49 +28,48 @@
     photoBlock.appendChild(photoFragment);
   };
 
-  var onSuccesdownload = function (data) {
-    photosData = data;
-    renderPhotos(data);
+  var onSuccesDownload = function (data) {
+    rawPhotos = data;
+    renderPhotos(rawPhotos);
     if (filtersField.classList.contains('filters-inactive')) {
       filtersField.classList.remove('filters-inactive');
     }
   };
 
-  window.backend.load(onSuccesdownload, window.backend.error);
+  window.backend.load(onSuccesDownload, window.backend.error);
 
   var sortOnClick = function (evt) {
     if (evt.target.type === 'radio') {
       var sortName = evt.target.value;
-      var photosDataCopy = photosData.slice();
       window.debounce(function () {
         photoBlock.innerHTML = '';
-        var data = filter[sortName](photosDataCopy);
-        renderPhotos(data);
+        var photos = filter[sortName](rawPhotos.slice());
+        renderPhotos(photos);
       }, 500);
     }
   };
 
-  var recommendSort = function (data) {
-    return data;
+  var recommendSort = function (photos) {
+    return photos;
   };
 
-  var popularSort = function (data) {
-    return data.sort(function (a, b) {
+  var popularSort = function (photos) {
+    return photos.sort(function (a, b) {
       return b.likes - a.likes;
     });
   };
 
-  var discussedSort = function (data) {
-    return data.sort(function (a, b) {
+  var discussedSort = function (photos) {
+    return photos.sort(function (a, b) {
       return b.comments.length - a.comments.length;
     });
   };
 
-  var randomSort = function (data) {
+  var randomSort = function (photos) {
     var shuffledArray = [];
-    while (data.length) {
-      var index = Math.floor(Math.random() * data.length);
-      var element = data.splice(index, 1)[0];
+    while (photos.length) {
+      var index = Math.floor(Math.random() * photos.length);
+      var element = photos.splice(index, 1)[0];
       shuffledArray.push(element);
     }
     return shuffledArray;

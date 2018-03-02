@@ -3,7 +3,7 @@
 (function () {
 
   var imagePreview = document.querySelector('.effect-image-preview');
-  var formsField = document.querySelector('.upload-effect-controls'); // поле с кнопками фильтров
+  var formsField = document.querySelector('.upload-effect-controls');
 
   var currentEffect;
   var switchFilter = function (filterName) {

@@ -1,6 +1,7 @@
 'use strict';
 
 (function () {
+
   var form = document.querySelector('.upload-form');
   var imageOverlay = form.querySelector('.upload-overlay');
   var closeOverlayButton = form.querySelector('.upload-form-cancel');
@@ -40,9 +41,7 @@
 
   var onFormClick = function (evt) {
     evt.preventDefault();
-    if (window.validity.isValidHashtags) {
-      window.backend.upload(new FormData(form), closeForm, window.backend.onErrorSend);
-    }
+    window.backend.upload(new FormData(form), closeForm, window.backend.onErrorSend);
   };
 
   form.addEventListener('submit', onFormClick);
