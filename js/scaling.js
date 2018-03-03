@@ -43,4 +43,12 @@
     decreseSize();
   });
 
+  var sizeReset = function () {
+    imagePreview.style.transform = '';
+  };
+
+  window.scaling = {
+    sizeReset: sizeReset
+  };
+
 })();

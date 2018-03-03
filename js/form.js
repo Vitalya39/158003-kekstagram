@@ -9,6 +9,7 @@
   var commentsInput = form.querySelector('.upload-form-description');
 
   var openForm = function () {
+
     imageOverlay.classList.remove('hidden');
     window.slider.hide();
   };
