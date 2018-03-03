@@ -43,12 +43,12 @@
     decreseSize();
   });
 
-  var sizeReset = function () {
+  var refreshSize = function () {
     imagePreview.style.transform = '';
   };
 
   window.scaling = {
-    sizeReset: sizeReset
+    refreshSize: refreshSize
   };
 
 })();

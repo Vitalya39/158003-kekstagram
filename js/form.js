@@ -17,8 +17,9 @@
   var closeForm = function () {
     form.reset();
     imageOverlay.classList.add('hidden');
-    window.validity.resetHashtags();
-    window.scaling.sizeReset();
+    window.validity.refreshHashtags();
+    window.scaling.refreshSize();
+    window.effects.refresh();
   };
 
   var onFormEscPress = function (evt) {

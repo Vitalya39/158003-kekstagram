@@ -50,13 +50,13 @@
 
   hashtagsInput.addEventListener('change', validateHashtags);
 
-  var resetHashtags = function () {
+  var refreshHashtags = function () {
     hashtagsInput.setCustomValidity('');
     hashtagsInput.style.border = '';
   };
 
   window.validity = {
-    resetHashtags: resetHashtags
+    refreshHashtags: refreshHashtags
   };
 
 })();
