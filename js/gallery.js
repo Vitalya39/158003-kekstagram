@@ -38,7 +38,7 @@
 
   window.backend.load(onSuccesDownload, window.backend.error);
 
-  var sortOnClick = function (evt) {
+  var sortPhotos = function (evt) {
     if (evt.target.type === 'radio') {
       var sortName = evt.target.value;
       window.debounce(function () {
@@ -82,7 +82,7 @@
     random: randomSort
   };
 
-  filtersField.addEventListener('click', sortOnClick);
+  filtersField.addEventListener('click', sortPhotos);
 
   filtersField.addEventListener('keydown', function (evt) {
     window.util.activationEvent(evt, function () {

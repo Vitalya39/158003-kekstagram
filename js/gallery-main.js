@@ -19,15 +19,15 @@
 
   var openOverlay = function () {
     overlay.classList.remove('hidden');
-    document.addEventListener('keydown', closeOverlayOnEsc);
+    document.addEventListener('keydown', onOverlayEscPress);
   };
 
   var closeOverlay = function () {
     overlay.classList.add('hidden');
-    document.removeEventListener('keydown', closeOverlayOnEsc);
+    document.removeEventListener('keydown', onOverlayEscPress);
   };
 
-  var closeOverlayOnEsc = function (evt) {
+  var onOverlayEscPress = function (evt) {
     window.util.deactivationEvent(evt, closeOverlay);
   };
 

@@ -6,7 +6,6 @@
   var imageOverlay = form.querySelector('.upload-overlay');
   var closeOverlayButton = form.querySelector('.upload-form-cancel');
   var fileInput = form.querySelector('.upload-input');
-  var hashtagsInput = form.querySelector('.upload-form-hashtags');
   var commentsInput = form.querySelector('.upload-form-description');
 
   var openForm = function () {
@@ -15,24 +14,24 @@
   };
 
   var closeForm = function () {
-    imageOverlay.classList.add('hidden');
     form.reset();
-    hashtagsInput.setCustomValidity('');
-    hashtagsInput.style.border = '';
+    imageOverlay.classList.add('hidden');
+    window.validity.resetHashtags();
+    window.scaling.sizeReset();
   };
 
-  var closeFormOnEsc = function (evt) {
+  var onFormEscPress = function (evt) {
     window.util.deactivationEvent(evt, closeForm);
   };
 
   fileInput.addEventListener('change', function () {
     openForm();
-    document.addEventListener('keydown', closeFormOnEsc);
+    document.addEventListener('keydown', onFormEscPress);
   });
 
   closeOverlayButton.addEventListener('click', function () {
     closeForm();
-    document.removeEventListener('keydown', closeFormOnEsc);
+    document.removeEventListener('keydown', onFormEscPress);
   });
 
   commentsInput.addEventListener('keydown', function (evt) {

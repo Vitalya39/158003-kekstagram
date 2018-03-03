@@ -7,7 +7,7 @@
   var HASHTAGS_MAX_QUANTITY = 5;
   var hashtagsInput = document.querySelector('.upload-form-hashtags');
 
-  var isValidHashtags = function () {
+  var validateHashtags = function () {
     var hashtags = hashtagsInput.value.toLowerCase().split(' ');
     hashtags = hashtags.filter(function (hashtag) {
       return hashtag !== '';
@@ -48,10 +48,15 @@
     return true;
   };
 
-  hashtagsInput.addEventListener('change', isValidHashtags);
+  hashtagsInput.addEventListener('change', validateHashtags);
+
+  var resetHashtags = function () {
+    hashtagsInput.setCustomValidity('');
+    hashtagsInput.style.border = '';
+  };
 
   window.validity = {
-    isValidHashtags: isValidHashtags
+    resetHashtags: resetHashtags
   };
 
 })();
