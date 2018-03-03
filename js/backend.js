@@ -4,6 +4,7 @@
 
   var POST_URL = 'https://js.dump.academy/kekstagram';
   var GET_URL = 'https://js.dump.academy/kekstagram/data';
+  var TIMEOUT = 10000;
 
   var upload = function (data, onLoad, onError) {
     var xhr = new XMLHttpRequest();
@@ -25,7 +26,7 @@
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
 
-    xhr.timeout = 10000;
+    xhr.timeout = TIMEOUT;
 
     xhr.addEventListener('load', function () {
       if (xhr.status === 200) {

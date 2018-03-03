@@ -2,6 +2,7 @@
 
 (function () {
 
+  var RENDER_DELAY = 500;
   var photoTemplate = document.querySelector('#picture-template').content;
   var photoBlock = document.querySelector('.pictures');
   var filtersField = document.querySelector('.filters');
@@ -45,7 +46,7 @@
         photoBlock.innerHTML = '';
         var photos = filter[sortName](rawPhotos.slice());
         renderPhotos(photos);
-      }, 500);
+      }, RENDER_DELAY);
     }
   };
 
