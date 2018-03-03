@@ -18,10 +18,10 @@
       var filterName = evt.target.value;
       switchFilter(filterName);
       if (filterName === 'none') {
-        window.slider.hideSlider();
+        window.slider.hide();
       } else {
-        window.slider.showSlider();
-        window.slider.resetSlider('100%');
+        window.slider.show();
+        window.slider.reset('100%');
       }
     }
   };
@@ -56,6 +56,6 @@
     }
   };
 
-  window.slider.initSlider(setEffectValue);
+  window.slider.init(setEffectValue);
 
 })();

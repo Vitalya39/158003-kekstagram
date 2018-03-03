@@ -11,7 +11,7 @@
 
   var openForm = function () {
     imageOverlay.classList.remove('hidden');
-    window.slider.hideSlider();
+    window.slider.hide();
   };
 
   var closeForm = function () {
