@@ -9,7 +9,7 @@
   var sliderPin = slider.querySelector('.upload-effect-level-pin');
   var sliderEffect = slider.querySelector('.upload-effect-level-val');
 
-  var init = function (callback) {
+  var initSlider = function (callback) {
     var onEffectLevelPinMousedown = function (evt) {
       evt.preventDefault();
       var startCoordinate = evt.clientX;
@@ -39,24 +39,24 @@
     sliderPin.addEventListener('mousedown', onEffectLevelPinMousedown);
   };
 
-  var show = function () {
+  var showSlider = function () {
     slider.classList.remove('hidden');
   };
 
-  var hide = function () {
+  var hideSlider = function () {
     slider.classList.add('hidden');
   };
 
-  var reset = function (value) {
+  var resetSlider = function (value) {
     sliderPin.style.left = value;
     sliderEffect.style.width = value;
   };
 
   window.slider = {
-    init: init,
-    show: show,
-    hide: hide,
-    reset: reset,
+    init: initSlider,
+    show: showSlider,
+    hide: hideSlider,
+    reset: resetSlider,
   };
 
 })();
