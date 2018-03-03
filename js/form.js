@@ -41,7 +41,7 @@
 
   var onFormClick = function (evt) {
     evt.preventDefault();
-    window.backend.upload(new FormData(form), closeForm, window.backend.onErrorSend);
+    window.backend.upload(new FormData(form), closeForm, window.backend.error);
   };
 
   form.addEventListener('submit', onFormClick);
