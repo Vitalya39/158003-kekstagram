@@ -7,7 +7,8 @@
 
   var slider = document.querySelector('.upload-effect-level');
   var sliderPin = slider.querySelector('.upload-effect-level-pin');
-  var sliderEffect = slider.querySelector('.upload-effect-level-val');
+  var sliderSaturation = slider.querySelector('.upload-effect-level-val');
+  var sliderValue = slider.querySelector('.upload-effect-level-value');
 
   var initSlider = function (callback) {
     var onEffectLevelPinMousedown = function (evt) {
@@ -25,7 +26,8 @@
           sliderPin.style.left = MIN_SLIDER_VALUE + 'px';
         }
         callback((sliderPin.offsetLeft - shiftX) / MAX_SLIDER_VALUE);
-        sliderEffect.style.width = parseFloat(sliderPin.style.left) / (MAX_SLIDER_VALUE / 100) + '%';
+        sliderSaturation.style.width = parseFloat(sliderPin.style.left) / (MAX_SLIDER_VALUE / 100) + '%';
+        sliderValue.setAttribute('value', parseFloat(sliderSaturation.style.width));
       };
       var onMouseUp = function (upEvt) {
         upEvt.preventDefault();
@@ -49,7 +51,7 @@
 
   var resetSlider = function (value) {
     sliderPin.style.left = value;
-    sliderEffect.style.width = value;
+    sliderSaturation.style.width = value;
   };
 
   window.slider = {
