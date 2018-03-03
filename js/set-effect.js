@@ -7,7 +7,7 @@
 
   var currentEffect;
   var switchFilter = function (filterName) {
-    imagePreview.classList = '';
+    imagePreview.classList.remove('effect-chrome', 'effect-sepia', 'effect-marvin', 'effect-phobos', 'effect-heat');
     imagePreview.style.filter = '';
     imagePreview.classList.add('effect-' + filterName);
     currentEffect = filterName;
