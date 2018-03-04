@@ -5,6 +5,7 @@
   var POST_URL = 'https://js.dump.academy/kekstagram';
   var GET_URL = 'https://js.dump.academy/kekstagram/data';
   var TIMEOUT = 10000;
+  var STATUS_OK = 200;
 
   var createRequest = function (onLoad, onError) {
     var xhr = new XMLHttpRequest();
@@ -13,7 +14,7 @@
     xhr.timeout = TIMEOUT;
 
     xhr.addEventListener('load', function () {
-      if (xhr.status === 200) {
+      if (xhr.status === STATUS_OK) {
         onLoad(xhr.response);
       } else {
         onError('Статус ответа: ' + xhr.status + ' ' + xhr.statusText);
