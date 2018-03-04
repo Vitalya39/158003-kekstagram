@@ -9,7 +9,6 @@
   var commentsInput = form.querySelector('.upload-form-description');
 
   var openForm = function () {
-
     imageOverlay.classList.remove('hidden');
     window.slider.hide();
   };
@@ -18,7 +17,6 @@
     form.reset();
     imageOverlay.classList.add('hidden');
     window.validity.refreshHashtags();
-    window.scaling.refreshSize();
     window.effects.refresh();
   };
 

@@ -4,10 +4,19 @@
 
   var imagePreview = document.querySelector('.effect-image-preview');
   var formsField = document.querySelector('.upload-effect-controls');
+  var sizeField = document.querySelector('.upload-resize-controls');
   var currentEffect;
 
+  sizeField.addEventListener('click', function (evt) {
+    window.scale.onClickResize(evt, imagePreview);
+  });
+
+  var refreshFilter = function () {
+    imagePreview.classList.remove('effect-' + currentEffect);
+  };
+
   var switchFilter = function (filterName) {
-    refreshEffects();
+    refreshFilter();
     imagePreview.style.filter = '';
     imagePreview.classList.add('effect-' + filterName);
     currentEffect = filterName;
@@ -59,7 +68,8 @@
   window.slider.init(setEffectValue);
 
   var refreshEffects = function () {
-    imagePreview.classList.remove('effect-chrome', 'effect-sepia', 'effect-marvin', 'effect-phobos', 'effect-heat');
+    refreshFilter();
+    imagePreview.style.transform = '';
   };
 
   window.effects = {
