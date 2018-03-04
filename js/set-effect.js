@@ -68,7 +68,7 @@
   window.slider.init(setEffectValue);
 
   var refreshEffects = function () {
-    refreshFilter();
+    switchFilter('none');
     imagePreview.style.transform = '';
   };
 
