@@ -5,6 +5,8 @@
   var STEP_VALUE = 25;
   var MAX_SIZE_VALUE = 100;
   var MIN_SIZE_VALUE = 0;
+  var INC_SIZE_BUTTON = 'upload-resize-controls-button-inc';
+  var DEC_SIZE_BUTTON = 'upload-resize-controls-button-dec';
 
   var size = document.querySelector('.upload-resize-controls-value');
 
@@ -34,10 +36,10 @@
 
   var onClickResize = function (evt, photo) {
     var currentTarget = evt.target;
-    if (currentTarget.classList.contains('upload-resize-controls-button-dec')) {
+    if (currentTarget.classList.contains(DEC_SIZE_BUTTON)) {
       decreaseSize(photo);
     }
-    if (currentTarget.classList.contains('upload-resize-controls-button-inc')) {
+    if (currentTarget.classList.contains(INC_SIZE_BUTTON)) {
       increaseSize(photo);
     }
   };
