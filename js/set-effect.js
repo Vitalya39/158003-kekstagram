@@ -8,7 +8,7 @@
   var currentEffect;
 
   sizeField.addEventListener('click', function (evt) {
-    window.scale.onClickResize(evt, imagePreview);
+    window.scale.onResizeButtonClick(evt, imagePreview);
   });
 
   var refreshFilter = function () {

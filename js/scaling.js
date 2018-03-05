@@ -34,7 +34,7 @@
     changeSize(photo);
   };
 
-  var onClickResize = function (evt, photo) {
+  var onResizeButtonClick = function (evt, photo) {
     var currentTarget = evt.target;
     if (currentTarget.classList.contains(DEC_SIZE_BUTTON)) {
       decreaseSize(photo);
@@ -45,7 +45,7 @@
   };
 
   window.scale = {
-    onClickResize: onClickResize
+    onResizeButtonClick: onResizeButtonClick
   };
 
 })();
