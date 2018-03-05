@@ -5,42 +5,47 @@
   var STEP_VALUE = 25;
   var MAX_SIZE_VALUE = 100;
   var MIN_SIZE_VALUE = 0;
+  var INC_SIZE_BUTTON = 'upload-resize-controls-button-inc';
+  var DEC_SIZE_BUTTON = 'upload-resize-controls-button-dec';
 
-  var imagePreview = document.querySelector('.effect-image-preview');
   var size = document.querySelector('.upload-resize-controls-value');
-  var sizeInc = document.querySelector('.upload-resize-controls-button-inc');
-  var sizeDec = document.querySelector('.upload-resize-controls-button-dec');
 
-  var imagePreviewScale = function () {
+  var changeSize = function (photo) {
     var currentValue = parseInt(size.value, 10);
     var scale = currentValue / MAX_SIZE_VALUE;
-    imagePreview.style.transform = 'scale(' + scale + ')';
+    photo.style.transform = 'scale(' + scale + ')';
   };
 
-  var increaseSize = function () {
+  var increaseSize = function (photo) {
     var currentValue = parseInt(size.value, 10);
     size.value = currentValue + STEP_VALUE + '%';
     if (parseInt(size.value, 10) > MAX_SIZE_VALUE) {
       size.value = MAX_SIZE_VALUE + '%';
     }
-    imagePreviewScale();
+    changeSize(photo);
   };
 
-  sizeInc.addEventListener('click', function () {
-    increaseSize();
-  });
-
-  var decreseSize = function () {
-    var commonValue = parseInt(size.value, 10);
-    size.value = commonValue - STEP_VALUE + '%';
+  var decreaseSize = function (photo) {
+    var currentValue = parseInt(size.value, 10);
+    size.value = currentValue - STEP_VALUE + '%';
     if (parseInt(size.value, 10) < MIN_SIZE_VALUE) {
       size.value = MIN_SIZE_VALUE + '%';
     }
-    imagePreviewScale();
+    changeSize(photo);
   };
 
-  sizeDec.addEventListener('click', function () {
-    decreseSize();
-  });
+  var onResizeButtonClick = function (evt, photo) {
+    var currentTarget = evt.target;
+    if (currentTarget.classList.contains(DEC_SIZE_BUTTON)) {
+      decreaseSize(photo);
+    }
+    if (currentTarget.classList.contains(INC_SIZE_BUTTON)) {
+      increaseSize(photo);
+    }
+  };
+
+  window.scale = {
+    onResizeButtonClick: onResizeButtonClick
+  };
 
 })();

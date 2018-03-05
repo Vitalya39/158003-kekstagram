@@ -6,33 +6,32 @@
   var imageOverlay = form.querySelector('.upload-overlay');
   var closeOverlayButton = form.querySelector('.upload-form-cancel');
   var fileInput = form.querySelector('.upload-input');
-  var hashtagsInput = form.querySelector('.upload-form-hashtags');
   var commentsInput = form.querySelector('.upload-form-description');
 
   var openForm = function () {
     imageOverlay.classList.remove('hidden');
-    window.slider.hideSlider();
+    window.slider.hide();
   };
 
   var closeForm = function () {
-    imageOverlay.classList.add('hidden');
     form.reset();
-    hashtagsInput.setCustomValidity('');
-    hashtagsInput.style.border = '';
+    imageOverlay.classList.add('hidden');
+    window.validity.refreshHashtags();
+    window.effects.refresh();
   };
 
-  var closeFormOnEsc = function (evt) {
+  var onFormEscPress = function (evt) {
     window.util.deactivationEvent(evt, closeForm);
   };
 
   fileInput.addEventListener('change', function () {
     openForm();
-    document.addEventListener('keydown', closeFormOnEsc);
+    document.addEventListener('keydown', onFormEscPress);
   });
 
   closeOverlayButton.addEventListener('click', function () {
     closeForm();
-    document.removeEventListener('keydown', closeFormOnEsc);
+    document.removeEventListener('keydown', onFormEscPress);
   });
 
   commentsInput.addEventListener('keydown', function (evt) {
@@ -41,7 +40,7 @@
 
   var onFormClick = function (evt) {
     evt.preventDefault();
-    window.backend.upload(new FormData(form), closeForm, window.backend.onErrorSend);
+    window.backend.upload(new FormData(form), closeForm, window.backend.error);
   };
 
   form.addEventListener('submit', onFormClick);

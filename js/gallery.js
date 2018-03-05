@@ -2,6 +2,7 @@
 
 (function () {
 
+  var RENDER_DELAY = 500;
   var photoTemplate = document.querySelector('#picture-template').content;
   var photoBlock = document.querySelector('.pictures');
   var filtersField = document.querySelector('.filters');
@@ -38,14 +39,14 @@
 
   window.backend.load(onSuccesDownload, window.backend.error);
 
-  var sortOnClick = function (evt) {
+  var onFilterButtonClick = function (evt) {
     if (evt.target.type === 'radio') {
       var sortName = evt.target.value;
       window.debounce(function () {
         photoBlock.innerHTML = '';
         var photos = filter[sortName](rawPhotos.slice());
         renderPhotos(photos);
-      }, 500);
+      }, RENDER_DELAY);
     }
   };
 
@@ -82,7 +83,7 @@
     random: randomSort
   };
 
-  filtersField.addEventListener('click', sortOnClick);
+  filtersField.addEventListener('click', onFilterButtonClick);
 
   filtersField.addEventListener('keydown', function (evt) {
     window.util.activationEvent(evt, function () {

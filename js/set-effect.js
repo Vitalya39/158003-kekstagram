@@ -4,10 +4,19 @@
 
   var imagePreview = document.querySelector('.effect-image-preview');
   var formsField = document.querySelector('.upload-effect-controls');
-
+  var sizeField = document.querySelector('.upload-resize-controls');
   var currentEffect;
+
+  sizeField.addEventListener('click', function (evt) {
+    window.scale.onResizeButtonClick(evt, imagePreview);
+  });
+
+  var refreshFilter = function () {
+    imagePreview.classList.remove('effect-' + currentEffect);
+  };
+
   var switchFilter = function (filterName) {
-    imagePreview.classList = '';
+    refreshFilter();
     imagePreview.style.filter = '';
     imagePreview.classList.add('effect-' + filterName);
     currentEffect = filterName;
@@ -18,10 +27,10 @@
       var filterName = evt.target.value;
       switchFilter(filterName);
       if (filterName === 'none') {
-        window.slider.hideSlider();
+        window.slider.hide();
       } else {
-        window.slider.showSlider();
-        window.slider.resetSlider('100%');
+        window.slider.show();
+        window.slider.reset('100%');
       }
     }
   };
@@ -56,6 +65,15 @@
     }
   };
 
-  window.slider.initSlider(setEffectValue);
+  window.slider.init(setEffectValue);
+
+  var refreshEffects = function () {
+    switchFilter('none');
+    imagePreview.style.transform = '';
+  };
+
+  window.effects = {
+    refresh: refreshEffects
+  };
 
 })();
