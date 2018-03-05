@@ -3,11 +3,8 @@
 (function () {
   var FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
 
-  var fileChooser = document.querySelector('#upload-file');
-  var imagePreview = document.querySelector('.effect-image-preview');
-
-  var loadImage = function (field) {
-    var file = fileChooser.files[0];
+  var onFileInputClick = function (preview, inputField) {
+    var file = inputField.files[0];
     var fileName = file.name.toLowerCase();
 
     var matches = FILE_TYPES.some(function (it) {
@@ -18,15 +15,15 @@
       var reader = new FileReader();
 
       reader.addEventListener('load', function () {
-        field.src = reader.result;
+        preview.src = reader.result;
       });
 
       reader.readAsDataURL(file);
     }
   };
 
-  fileChooser.addEventListener('change', function () {
-    loadImage(imagePreview);
-  });
+  window.uploadPhoto = {
+    onFileInputClick: onFileInputClick
+  };
 
 })();
