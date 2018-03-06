@@ -5,10 +5,15 @@
   var imagePreview = document.querySelector('.effect-image-preview');
   var formsField = document.querySelector('.upload-effect-controls');
   var sizeField = document.querySelector('.upload-resize-controls');
+  var fileChooser = document.querySelector('.upload-input');
   var currentEffect;
 
   sizeField.addEventListener('click', function (evt) {
     window.scale.onResizeButtonClick(evt, imagePreview);
+  });
+
+  fileChooser.addEventListener('change', function () {
+    window.uploadPhoto.onFileInputClick(imagePreview, fileChooser);
   });
 
   var refreshFilter = function () {
