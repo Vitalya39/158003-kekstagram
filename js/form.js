@@ -27,6 +27,7 @@
   fileInput.addEventListener('change', function () {
     openForm();
     document.addEventListener('keydown', onFormEscPress);
+    window.effects.onFileInputClick(fileInput);
   });
 
   closeOverlayButton.addEventListener('click', function () {

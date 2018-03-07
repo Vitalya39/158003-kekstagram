@@ -1,19 +1,14 @@
 'use strict';
 
 (function () {
-
+  var FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
   var imagePreview = document.querySelector('.effect-image-preview');
   var formsField = document.querySelector('.upload-effect-controls');
   var sizeField = document.querySelector('.upload-resize-controls');
-  var fileInput = document.querySelector('.upload-input');
   var currentEffect;
 
   sizeField.addEventListener('click', function (evt) {
     window.scale.onResizeButtonClick(evt, imagePreview);
-  });
-
-  fileInput.addEventListener('change', function () {
-    window.uploadPhoto.onFileInputClick(imagePreview, fileInput);
   });
 
   var refreshFilter = function () {
@@ -77,8 +72,28 @@
     imagePreview.style.transform = '';
   };
 
+  var onFileInputClick = function (inputField) {
+    var file = inputField.files[0];
+    var fileName = file.name.toLowerCase();
+
+    var matches = FILE_TYPES.some(function (it) {
+      return fileName.endsWith(it);
+    });
+
+    if (matches) {
+      var reader = new FileReader();
+
+      reader.addEventListener('load', function () {
+        imagePreview.src = reader.result;
+      });
+
+      reader.readAsDataURL(file);
+    }
+  };
+
   window.effects = {
-    refresh: refreshEffects
+    refresh: refreshEffects,
+    onFileInputClick: onFileInputClick
   };
 
 })();
