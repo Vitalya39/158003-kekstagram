@@ -7,7 +7,7 @@
   var HASHTAGS_MAX_QUANTITY = 5;
   var hashtagsInput = document.querySelector('.upload-form-hashtags');
 
-  var validateHashtags = function () {
+  var onHashtagsInputChange = function () {
     var hashtags = hashtagsInput.value.toLowerCase().split(' ');
     hashtags = hashtags.filter(function (hashtag) {
       return hashtag !== '';
@@ -48,7 +48,7 @@
     return true;
   };
 
-  hashtagsInput.addEventListener('change', validateHashtags);
+  hashtagsInput.addEventListener('change', onHashtagsInputChange);
 
   var refreshHashtags = function () {
     hashtagsInput.setCustomValidity('');
