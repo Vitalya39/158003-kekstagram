@@ -72,7 +72,7 @@
     imagePreview.style.transform = '';
   };
 
-  var onFileInputClick = function (inputField) {
+  var onInputChange = function (inputField) {
     var file = inputField.files[0];
     var fileName = file.name.toLowerCase();
 
@@ -91,9 +91,9 @@
     }
   };
 
-  window.effects = {
+  window.preview = {
     refresh: refreshEffects,
-    onFileInputClick: onFileInputClick
+    onInputChange: onInputChange
   };
 
 })();
