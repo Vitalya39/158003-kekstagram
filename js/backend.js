@@ -6,6 +6,7 @@
   var GET_URL = 'https://js.dump.academy/kekstagram/data';
   var TIMEOUT = 10000;
   var STATUS_OK = 200;
+  var ERROR_TIMEOUT = 5000;
 
   var createRequest = function (onLoad, onError) {
     var xhr = new XMLHttpRequest();
@@ -54,6 +55,9 @@
 
     node.textContent = errorMessage;
     document.body.insertAdjacentElement('afterbegin', node);
+    window.debounce(function () {
+      document.body.removeChild(node);
+    }, ERROR_TIMEOUT);
   };
 
   window.backend = {
