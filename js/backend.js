@@ -47,12 +47,7 @@
 
   var error = function (errorMessage) {
     var errorNode = document.createElement('div');
-    errorNode.style = 'z-index: 100; margin: 0 auto; text-align: center; background-color: red;';
-    errorNode.style.position = 'absolute';
-    errorNode.style.left = 0;
-    errorNode.style.right = 0;
-    errorNode.style.fontSize = '30px';
-
+    errorNode.classList.add('error');
     errorNode.textContent = errorMessage;
     document.body.insertAdjacentElement('afterbegin', errorNode);
     window.debounce(function () {
